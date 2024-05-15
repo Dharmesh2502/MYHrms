@@ -1,0 +1,42 @@
+
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30px;
+} 
+
+.flex-containers {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-item-left {
+  background-color: #9bbcfdc2;
+  padding: 10px;
+  flex: 50%;
+  align-content: center;
+  text-align: center;
+}
+
+.flex-item-right {
+  background-color: #9bbcfdc2;
+  padding: 10px;
+  flex: 50%;
+  align-content: center;
+}
+.eventbtn{
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 10px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.div{
+  border: 5px solid #dbcfc3;
+  border-radius: 10px;
+}
+

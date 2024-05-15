@@ -1,0 +1,47 @@
+<app-header></app-header>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="back_outer">
+<div class="d-flex justify-content-center">
+    <form [formGroup]="Referenceform">
+      <div class="form-group">
+          <div class="flex-item-right" *ngIf="!noreference">
+            <table id="tableid" class="table table-striped table-hover" >
+              <thead>
+                <th><h3>Added on</h3></th>
+                <th><h3>Position</h3></th>
+                <th><h3>Name</h3></th>
+                <th><h3>Mobile No.</h3></th>
+                <th><h3>Referred By</h3></th>
+                <th><h3>Action</h3></th>
+              </thead>
+              <tbody>
+                <!-- for binding the profile ddl -->
+                <tr *ngFor="let val of def" class="form-group">
+                  <td>{{ val.add_time | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{ val.position_name }}</td>
+                  <td>{{ val.name }}</td>
+                  <td>{{ val.mob_no }}</td>
+                  <td>{{ val.Employee_Name }}</td>
+                  <!-- button for downloading the uploaded file -->
+                  <td>
+                    <button class="eventbtn" (click)="downloadclk(val.upload_cv,val.name)"><i
+                      class="fa fa-download" ></i></button>               
+                  </td>
+                  <!-- button for deleting the references -->
+                  <td>
+                    <button class="eventbtn" (click)="deleteclk(val.candidate_id)"><i
+                      class="fa fa-trash" ></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            <div class="flex-item-right" *ngIf="noreference">
+                <p> No references available </p>
+            </div> 
+        <br />
+      </div>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,91 @@
+
+<app-header></app-header>
+<div class="back_outer">
+  <h2>Monthly Leave Report</h2>
+  <form  [formGroup]="ReportForm" class="form-group">
+
+    <div class="container-fluid border form-control d-flex">
+      <div >
+        <label>Name </label>:
+        <select class="d-flex form-control" formControlName="Employee_Name" (change)="Get_Emp_name($event)" id="selectid">
+          <option value="" selected>Select-Employee</option>
+          <option *ngFor="let emp of Arraydata">{{emp.Employee_Name}}</option>
+        </select>
+      </div>
+      <div [ngClass]="isVisible? 'd-block' : 'd-none'" class="d-flex gap-5">
+       <!-- <div>
+         <label class="form-label">From-Date</label>:
+         <input type="date" class="form-control" formControlName="From_Date" placeholder="select-From-Date"
+         [ngClass]="{'is-invalid': EmpFormSubmitted && this.ReportForm.controls['From_Date'].errors }" />
+          <div *ngIf="EmpFormSubmitted && this.ReportForm.controls['From_Date'].errors" class="invalid-feedback">
+              <div *ngIf="this.ReportForm.controls['From_Date'].errors['required']">From Date is required</div>
+          </div>
+       </div>
+        <div>
+          <label class="form-label">To-Date</label>:
+          <input type="date" class="form-control" formControlName="To_Date" placeholder="select-From-Date"
+          [ngClass]="{'is-invalid': EmpFormSubmitted && this.ReportForm.controls['To_Date'].errors }" />
+          <div *ngIf="EmpFormSubmitted && this.ReportForm.controls['To_Date'].errors" class="invalid-feedback">
+              <div *ngIf="this.ReportForm.controls['To_Date'].errors['required']"> To Date is required</div>
+          </div>
+        </div> -->
+        <div class="small_controls mx-3">
+          <label>From Date</label>
+          <input type="text"  class="form-control clsDatepickerFromDate" readonly data-provide="datepicker" placeholder="dd/mm/yyyy" formControlName="From_Date"
+          [ngClass]="{'is-invalid': EmpFormSubmitted && this.ReportForm.controls['From_Date'].errors }" />
+          <div *ngIf="EmpFormSubmitted && this.ReportForm.controls['From_Date'].errors" class="invalid-feedback">
+              <div *ngIf="this.ReportForm.controls['From_Date'].errors['required']">From Date is required</div>
+          </div>
+      </div> 
+      <div>
+        <label>To 
+          
+          Date</label>:
+        <input type="text" class="form-control clsDatepickerToDate" formControlName="To_Date"readonly data-provide="datepicker" placeholder="dd/mm/yyyy"
+        [ngClass]="{'is-invalid': EmpFormSubmitted && this.ReportForm.controls['To_Date'].errors }" />
+          <div *ngIf="EmpFormSubmitted && this.ReportForm.controls['To_Date'].errors" class="invalid-feedback">
+              <div *ngIf="this.ReportForm.controls['To_Date'].errors['required']"> To Date is required</div>
+          </div>
+      </div>
+        <div>
+          <button class="btn btn-primary " (click)="get_reportBy_date()">Show</button>
+        </div>
+      </div>
+    </div>
+    <div  class="tbl_report mt-5">
+      <table id="tablesids" class="table table-striped table-bordered table-hover  ">
+        <thead >
+          <tr>
+            <th>Sr.No.</th>
+            <th>ID</th>
+            <th>Employee_Code</th>
+            <th>Employee_Name</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>No of Leaves</th>
+            <th>No of Working Days</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of dataSource;let n = index">
+            <td>{{n+1}}</td>
+            <td>{{i.ID}}</td>
+            <td>{{i.Employee_Code}}</td>
+            <td>{{i.Employee_Name}}</td>
+            <td>{{i.From_Date|date:'dd/MM/yyyy'}}</td>
+            <td>{{i.To_Date|date:'dd/MM/yyyy'}}</td>
+            <td>{{i.No_Leaves}}</td>
+            <td>{{i.No_Working_Days}}</td>
+            <td>{{i.Status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container">
+      <input type="button" value="Export To Excel" (click)="exportExcel()" [hidden]="ExportBtn"/>
+    </div>
+  </form>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,16 @@
+.boxofform{
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+td {
+    padding: 15px;
+  }
+
+.prevent-select {
+    -webkit-user-select: none; /* Safaris */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    pointer-events: none;
+    color: rgb(20, 19, 75);
+  }

@@ -1,0 +1,157 @@
+<app-header></app-header>
+<div class="back_outer" [ngClass]="{'prevent-select': isAdmin}">
+<div class="boxofform">
+    <form [formGroup]="grievanceForm" autocomplete="off">
+        <br *ngIf="!isAdmin">
+        <div *ngIf="!isAdmin" class="form-control">
+            <p>This form is used to file a formal grievance. All sections must be completed and will serve as the source
+                document for the grievance process.</p>
+            <p>All supporting documents must be attached to this grievance form at the time the grievance is filed.
+                Additional information may be requested as necessary.</p>
+        </div>
+        <br>        
+        <div >
+            <h4 > <b> Complaint Information: </b></h4>
+            <table >
+                <tr>
+                    <td>
+                        <label>
+                            <b> 1.Date of Incident</b>
+                        </label>
+                    </td>
+                    <td width="60%"><input type="text" id="doi" placeholder="Select Date" readonly maxlength="10" 
+                            formControlName="DateOfIncident" class="datepicker form-control form-control-lg"
+                            data-provide="datepicker" class="form-control"
+                            [ngClass]="{'is-invalid': grievanceFormSubmited && r['DateOfIncident'].errors}" />
+                        <div *ngIf="grievanceFormSubmited && r['DateOfIncident'].errors" class="invalid-feedback">
+                            <div *ngIf="r['DateOfIncident'].errors['required']">Date is required </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>
+                            <b>2.Time of Incident </b>
+                        </label>
+                    </td>
+                    <td><input type="text" id="toi" formControlName="TimeOfIncident" placeholder="Select Time"
+                            class="form-control" data-provide="timepicker" readonly maxlength="8"
+                            [ngClass]="{'is-invalid': grievanceFormSubmited && r['TimeOfIncident'].errors}" />
+                        <div *ngIf="grievanceFormSubmited && r['TimeOfIncident'].errors" class="invalid-feedback">
+                            <div *ngIf="r['TimeOfIncident'].errors['required']">Time is required </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>
+                            <b>3.Location of Incident </b>
+                        </label>
+                    </td>
+                    <td><input type="text" id="loi" formControlName="LocationOfIncident" class="form-control" maxlength="30"
+                            [ngClass]="{'is-invalid': grievanceFormSubmited && r['LocationOfIncident'].errors}" />
+                        <div *ngIf="grievanceFormSubmited && r['LocationOfIncident'].errors" class="invalid-feedback">
+                            <div *ngIf="r['LocationOfIncident'].errors['required']">Location is required </div>
+                            <div *ngIf="r['LocationOfIncident'].errors['pattern']">Please enter valid location </div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>
+                            <b>4.Complaint against </b>
+                        </label>
+                    </td>
+                    <td><input type="text" id="complaintAgainst" placeholder="Employeename,Designation" maxlength="50"
+                            class="form-control" formControlName="ComplaintAgainst" placeholder="Employee name, designation"
+                            [ngClass]="{'is-invalid': grievanceFormSubmited && r['ComplaintAgainst'].errors}" />
+                        <div *ngIf="grievanceFormSubmited && r['ComplaintAgainst'].errors" class="invalid-feedback">
+                            <div *ngIf="r['ComplaintAgainst'].errors['required']">Name of that employee is required
+                            </div>
+                            <div *ngIf="r['ComplaintAgainst'].errors['pattern']">Please enter valid employee name
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div>
+            <p><b>5.Please describe the incident in details : </b></p>
+            <textarea name="incidentDetails" cols="60" rows="4" formControlName="IncidentDetails" class="form-control"
+                [ngClass]="{'is-invalid': grievanceFormSubmited && r['IncidentDetails'].errors}"></textarea>
+            <div *ngIf="grievanceFormSubmited && r['IncidentDetails'].errors" class="invalid-feedback">
+                <div *ngIf="r['IncidentDetails'].errors['required']">Incident details is required </div>
+            </div>
+        </div>
+        <br>
+        <div>
+            <p><b> 6.If there are others who witnessed the incident, please provide details below: </b></p>
+            <table>
+                <tr>
+                    <td>
+                        <label>
+                            <b>A) Employee name </b>
+                        </label>
+                    </td>
+                    <td><input type="text" id="empname" formControlName="WitnessEmployeeName" class="form-control" maxlength="50"
+                            [ngClass]="{'is-invalid': grievanceFormSubmited && r['WitnessEmployeeName'].errors}" />
+                        <div *ngIf="grievanceFormSubmited && r['WitnessEmployeeName'].errors" class="invalid-feedback">
+                            <div *ngIf="r['WitnessEmployeeName'].errors['pattern']">Please enter valid employee name
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>
+                            <b>B) Contact number </b>
+                        </label>
+                    </td>
+                    <td><input type="text" id="contactnumber" formControlName="WitnessContactNumber" maxlength="10"
+                            class="form-control"
+                            [ngClass]="{'is-invalid': grievanceFormSubmited && r['WitnessContactNumber'].errors}" />
+                        <div *ngIf="grievanceFormSubmited && r['WitnessContactNumber'].errors" class="invalid-feedback">
+                            <div *ngIf="r['WitnessContactNumber'].errors['pattern']">Please enter valid contact number
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>
+                            <b>C) Email id </b>
+                        </label>
+                    </td>
+                    <td><input type="text" id="empemail" formControlName="WitnessEmailId" class="form-control"
+                            pattern="^\w+([\.-]?\w+)*@\w+([\.]?\w+)*(\.\w{2,3})+$" maxlength="100"
+                            [ngClass]="{'is-invalid': grievanceFormSubmited && r['WitnessEmailId'].errors}" />
+                        <div *ngIf="grievanceFormSubmited && r['WitnessEmailId'].errors" class="invalid-feedback">
+                            <div *ngIf="r['WitnessEmailId'].errors['pattern']">Please enter valid email
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div>
+            <p><b>7.Is this the first time you have raised this concern about this person? </b></p>
+            <input type="radio" id="radioyes" groupname="ans" value="yes" formControlName="FirstTimeIssues"
+                [ngClass]="{'is-invalid': grievanceFormSubmited && r['FirstTimeIssues'].errors}">
+            <label> &nbsp; Yes</label>&nbsp;
+            <input type="radio" id="radiono" groupname="ans" value="no" formControlName="FirstTimeIssues"
+                [ngClass]="{'is-invalid': grievanceFormSubmited && r['FirstTimeIssues'].errors}">
+            <label>&nbsp;No</label><br>
+            <div *ngIf="grievanceFormSubmited && r['FirstTimeIssues'].errors" class="invalid-feedback">
+                <div *ngIf="r['FirstTimeIssues'].errors['required']">Please select yes or no </div>
+            </div>
+        </div>
+        <br>
+        <div>
+            <p><b>8.Do you have any suggestions for resolving the complaint? <br> If so, please explain </b></p>
+            <textarea name="suggestions" cols="60" rows="4" formControlName="SuggestionsForResolve"
+                class="form-control"></textarea>
+        </div>
+        <br>
+        <button *ngIf="!isAdmin" type="button" class="btn btn-primary" (click)="onsubmit()">Submit</button>
+    </form>
+</div>
+</div>
+<app-footer></app-footer>

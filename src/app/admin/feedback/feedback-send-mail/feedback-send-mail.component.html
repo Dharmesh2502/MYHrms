@@ -1,0 +1,51 @@
+<app-header></app-header>
+<div class="back_outer">
+<div class="container">
+<ngx-spinner bdColor = "rgba(234,223,223,0.99)" size = "medium" color = "#4285f4" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: black;" class="loader-text"> Email sending.... </p></ngx-spinner>
+<form>
+    <div class="row">
+        <div class="col-md-4">
+            <select class="form-control" id="ddl_emp" (change)="chnage_emp_ddl()">
+              <option value="0">Select Employee</option>
+                <option *ngFor="let data of employeeList.Table" value="{{data.emp_id}}">{{data.emp_name}}</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <select class="form-control" (change)="getModuleData()" id="ddl_dept">
+              <option value="0">Select Department</option>
+                <option *ngFor="let data of departmentList" value="{{data.dept_id}}">{{data.dept_name}}</option>
+            </select>
+        </div>
+        <div class="col-md-4" *ngIf="moduleList !==undefined ">
+            <select class="form-control" id="ddl_module" (change)="getTraineeData()">
+                <option value="0">Select Module</option>
+                <option  *ngFor="let data of moduleList" value="{{data.mod_id}}">{{data.mod_name}}</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<div *ngIf="traineeData !==undefined">
+      <table class="table table-bordered table-hover table-striped employeelist">
+          <thead>
+            <tr>
+              <th scope="col">Employee Name</th>
+              <th scope="col">Department</th>
+              <th scope="col">Select Employee</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of traineeData;let i = index">
+              <td>{{item.emp_name}}</td>
+              <td>{{item.dept_name}}</td>
+              <td><input type="checkbox" class="checkBoxClass" (change)="handleCheckbox(item.emp_id)"/></td>
+            </tr>
+          </tbody>
+        </table>
+        <input type="checkbox" class="check-all" (change)="selectAllCheckbox()">&nbsp;<label>Select All Employee</label>&nbsp;
+  
+        <button class="btn btn-primary" (click)="sendMail()">Send Mail</button>
+  </div>
+</div>
+  <app-footer></app-footer>

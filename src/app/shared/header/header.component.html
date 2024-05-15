@@ -1,0 +1,108 @@
+
+<img src="../../../assets/images/OptimumLogo.svg" ID="logoimg" class="mt-3" alt="OptimumLogo" *ngIf="!isdisplay && isPath">
+<nav class="navbar navbar-expand-lg navbar-light bg-light  navbar-fixed-top" *ngIf="isdisplay && isPath">
+  <div class="container-fluid">
+    <img src="../../../assets/images/OptimumLogo.svg" alt="OptimumLogo">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <!-- <a class="nav-link active" (click)="GoToDashboard()">Dashboard</a>
+        <a class="nav-link" routerLink="/set-password">Documents</a>
+        <a class="nav-link" routerLink="/utilities">Utilities</a>
+        <a class="nav-link" href="#">My Profile</a>
+        <a class="nav-link" routerLink="/report" routerLinkActive="active">Report</a>
+
+        <a class="nav-link" href="#">Log out</a> -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link active" (click)="GoToDashboard()">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/utilities">Utilities</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/report">Report</a>
+          </li>
+          <li class="nav-item dropdown" *ngIf="userType == '1'">
+            <a class="nav-link dropdown-toggle" id="Menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Feedback
+            </a>
+            <div class="dropdown-menu" aria-labelledby="Menu">
+              <a class="dropdown-item" routerLink="/feedback/add-dept">Add Department</a>
+              <a class="dropdown-item" routerLink="/feedback/add-employee">Add Employee</a>
+              <a class="dropdown-item" routerLink="/feedback/add-module">Add Module</a>
+              <a class="dropdown-item" routerLink="/feedback/feedback-list">Feedback List</a>
+              <a class="dropdown-item" routerLink="/feedback/feedback-send-mail">Feedback Send Mail</a>
+              <a class="dropdown-item" routerLink="/feedback/mis-report">Mis Report</a>
+              <a class="dropdown-item" routerLink="/feedback/mis-submit">Mis Status</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown" *ngIf="userType == '1'">
+            <a class="nav-link dropdown-toggle" id="Menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Menu
+            </a>
+            <div class="dropdown-menu" aria-labelledby="Menu">
+              <a class="dropdown-item" routerLink="/add-event-gallery">Add Event Gallery</a>
+              <a class="dropdown-item" routerLink="/addvacancy">Add Vacant Position</a>
+              <!-- <a class="dropdown-item" routerLink="/Attendance-report">Attendance Report </a> -->
+              <a class="dropdown-item" routerLink="/emp-month">Add Employee Of The Month</a>
+              <a class="dropdown-item" routerLink="/events">Add Monthly Events</a>
+              <!-- <a class="dropdown-item" routerLink="/grievancelist">Grievance List</a> -->
+              <a class="dropdown-item" routerLink="/important-notice">Add Important Announcement</a>
+             <a class="dropdown-item" routerLink="/addsalaryslip">Add Document</a>
+              <!-- <a class="dropdown-item" routerLink="/resignation-list">Resignation List</a> -->
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  routerLink="/profile" *ngIf="userType == '0'">My Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="signouts()">Daily SignOff</a>
+          </li>
+          <li class="nav-item">
+                      </li>
+        </ul>
+      </div>
+      <div class="logoutbtn">
+        <span class="logoutbtn"><i class="bi bi-box-arrow-right " aria-hidden="false" (click)="onLogOutClick()"></i></span>
+      </div>
+    </div>
+  </div>
+  <div>
+  </div>
+</nav>
+<!-- 
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://getbootstrap.com/examples/theme/#">Bootstrap theme</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="https://getbootstrap.com/examples/theme/#">Home</a></li>
+        <li><a href="https://getbootstrap.com/examples/theme/#about">About</a></li>
+        <li><a href="https://getbootstrap.com/examples/theme/#contact">Contact</a></li>
+        <li class="dropdown">
+          <a href="https://getbootstrap.com/examples/theme/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="https://getbootstrap.com/examples/theme/#">Action</a></li>
+            <li><a href="https://getbootstrap.com/examples/theme/#">Another action</a></li>
+            <li><a href="https://getbootstrap.com/examples/theme/#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li class="dropdown-header">Nav header</li>
+            <li><a href="https://getbootstrap.com/examples/theme/#">Separated link</a></li>
+            <li><a href="https://getbootstrap.com/examples/theme/#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav> -->

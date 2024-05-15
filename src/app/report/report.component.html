@@ -1,0 +1,100 @@
+<app-header></app-header>
+<div class="back_outer">
+<div class="report-container">
+  <div class="report-heading">
+      <h4>REPORTS</h4>
+  </div>
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>REPORT TYPE</th>
+          <th>DOWNLOAD</th>     
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Applied Leave History</td>
+          <td><i class="bi bi-download" routerLink="/report/monthly-report"></i></td>
+        </tr>
+        <tr *ngIf="userType == '1'">
+          <td>Daily Task Sheet</td>
+          <td><i class="bi bi-download" routerLink="/admintasksheet"></i></td>
+        </tr>
+        <tr>
+          <td>Attendance Report</td>
+          <td><i class="bi bi-download" routerLink="/Attendance-report"></i></td>
+        </tr>
+        <tr>
+          <td>Employee Contact Directory</td>
+          <td><i class="bi bi-download" routerLink="/report/contact-directory"></i></td>
+        </tr>
+        <tr>
+          <td>Employees on Leave</td>
+          <td><i class="bi bi-download" routerLink="/report/emp-on-leave"></i></td>
+        </tr>
+        <tr>
+          <td>Documents</td>
+          <td><i class="bi bi-download" routerLink="/report/document"></i></td>
+        </tr>
+        <tr *ngIf="userType == '1'">
+          <td>Grievance Report</td>
+          <td><i class="bi bi-download" routerLink="/grievancelist"></i></td>
+        </tr>
+        <tr *ngIf="userType == '1'">
+          <td>Reference List</td>
+          <td><i class="bi bi-download" routerLink="/refercandidate"></i></td>
+        </tr>
+        <tr *ngIf="userType == '1'">
+          <td>Resignation List</td>
+          <td><i class="bi bi-download" routerLink="/resignation-list"></i></td>
+        </tr>    
+      </tbody>
+    </table>
+  </div>
+  
+  
+  <!-- (click)="viewExcel() <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button> -->
+  
+  <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Download Task Sheet</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <!-- <span aria-hidden="true">&times;</span> -->
+          </button>
+        </div>
+        <div class="modal-body" style="overflow:hidden;">
+          <form [formGroup]="EmpForm">
+            <div class="form-group">
+              <label for="emp-name" class="col-form-label">Employee Name :</label>
+              <select class="form-control select2 select2-hidden-accessible"  id="emp_det" style="width: 100%;"
+               formControlName="emp_name"  [ngClass]="{'is-invalid':EmpFormSubmitted && r['emp_name'].errors}">
+              <option selected value="">-- Select Employee --</option>
+              <option *ngFor="let item of emp_details" [value]="item.ID">{{item.Employee_Name}}</option>
+            </select>
+            <div *ngIf="EmpFormSubmitted && r['emp_name'].errors" class="invalid-feedback">
+              <div *ngIf="r['emp_name'].errors['required']">Employee is Required</div>
+            </div>
+            <div *ngIf="showUploadedDate">
+              <label class="mt-2" [style.color]="hasError ? 'red':'green'">{{ hasError ? 'No file uploaded' : 'Last uploaded 										date : '}}</label>&nbsp;
+              <label [style.color]="hasError ? 'red':'green'">{{ hasError ? '' : uploaded_date | date : 'dd-MM-yyyy'}}</label>       
+            </div>
+            <!-- <select id="emp_det" class="form-control" style="width: 100%;" tabindex="-1"
+               formControlName="emp_name">
+              <option selected value="">-- Select Employee --</option>
+              <option *ngFor="let item of emp_details" [value]="item.ID">{{item.Employee_Name}}</option>
+            </select> -->
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="downloadExcel()">Download</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <app-footer></app-footer>
+    

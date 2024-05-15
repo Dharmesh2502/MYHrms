@@ -1,0 +1,40 @@
+<app-header></app-header>
+<div class="back_outer">
+<div class="outer">
+    <br>
+    <form action="">
+        
+        <h2>UTILITIES</h2>
+        <br><br>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <td class="align-middle">Apply for Leave</td>
+                    <td><button type="button" class="btn btn-primary" routerLink="/utilities/leave">Click Here</button></td>
+                </tr>
+                <tr *ngIf="emp_rec">
+                    <td class="align-middle">Refer a Candidate</td>
+                    <td><button type="button" class="btn btn-primary"  routerLink="/utilities/add-reference">Click Here</button></td>
+                </tr>
+                <tr>
+                    <td class="align-middle">Add Daily Task Sheet</td>
+                    <td><button type="button" class="btn btn-primary" routerLink="/report/daily-task-sheet">Click Here</button></td>
+                </tr>
+                <tr *ngIf="emp_rec">
+                    <td class="align-middle">Add Grievance</td>
+                    <td><button type="button" class="btn btn-primary" routerLink="/utilities/grievanceform">Click Here</button></td>
+                </tr>
+                <tr *ngIf="emp_rec">
+                    <td class="align-middle">Resignation</td>
+                    <td><button type="button" class="btn btn-primary"  routerLink="/utilities/resignation" >Click Here</button></td>
+                </tr>
+                <tr *ngIf="emp_rec">
+                    <td class="align-middle">Self/Performance evaluation</td>
+                    <td><button type="button" class="btn btn-primary">Click Here</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</div>
+<app-footer></app-footer>

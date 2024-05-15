@@ -1,0 +1,71 @@
+<app-header></app-header>
+<div class="back_outer">
+<div class="d-flex justify-content-center flex-containers"> 
+  <div class="form-group div">
+    <form [formGroup]="Referform" autocomplete="off" enctype="multipart/form-data">
+        <div class="flex-item-left">
+            <img width="30%" src="https://nwsid.net/wp-content/uploads/2015/05/dummy-profile-pic.png">
+        </div>
+            <div class="flex-item-left">
+            <label> Position name :</label>
+            <select formControlName="profile_id" id="profile" style="width: 100%;"
+            [ngClass]="{ 'is-invalid': Referformsubmitted && r['profile_id'].errors}">     
+              <option value="" class="text-primary font-weight-bolder">
+                Select Position
+              </option>
+              <option *ngFor="let profile of post" [value]="profile.profile_id">  
+                {{profile.profile_name}}             
+              </option>
+            </select>   
+            <div *ngIf="Referformsubmitted && r['profile_id'].errors" class="invalid-feedback">
+              <div *ngIf="r['profile_id'].errors['required']"> Please select profile </div>  
+            </div>
+        </div>
+        <div class="flex-item-left">
+          <div>
+            <input
+              formControlName="name"
+              class="form-control"
+              placeholder="Enter name"
+              [ngClass]="{'is-invalid': Referformsubmitted && r['name'].errors}"/>
+            <div *ngIf="Referformsubmitted && r['name'].errors" class="invalid-feedback">
+              <div *ngIf="r['name'].errors['required']"> Please enter name </div>
+              <div *ngIf="r['name'].errors['pattern']">Characters only</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="flex-item-right">
+            <div>
+              <input maxlength="10" formControlName="mob_no" class="form-control" type="text" placeholder="Enter mobile number"
+                [ngClass]="{'is-invalid': Referformsubmitted && r['mob_no'].errors}"/>
+              <div *ngIf="Referformsubmitted && r['mob_no'].errors" class="invalid-feedback">
+                <div *ngIf="r['mob_no'].errors['required']">
+                  Please enter mobile number
+                </div>
+                <div *ngIf="r['mob_no'].errors['pattern']">Enter a valid mobile number</div>
+              </div>
+          </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="flex-item-right">
+            <input formControlName="upload_cv" type="file" (change)="handleFileInput($event)"
+            [ngClass]="{'is-invalid': Referformsubmitted && r['upload_cv'].errors}" />
+            <div *ngIf="Referformsubmitted && r['upload_cv'].errors" class="invalid-feedback">
+              <div *ngIf="r['upload_cv'].errors['required']">
+                Please upload resume
+              </div>
+          </div>
+      </div>
+        </div>
+      <div class="form-group">
+        <div class="flex-item-right">
+          <input type="submit" class="eventbtn" (click)="OnSubmit()">
+        </div>
+    </div>
+    </form>
+  </div>
+  </div>
+</div>
+    <app-footer></app-footer>

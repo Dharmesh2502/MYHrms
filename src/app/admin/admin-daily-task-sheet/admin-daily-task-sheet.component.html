@@ -1,0 +1,72 @@
+<app-header></app-header>
+<div class="form-group mt-4  border border-success bottomparts">
+  <br>
+  <form [formGroup]="Emp_Tasksheet" >
+    <div>
+    <label for="emp-name" class="col-form-label mt-2">Employee Name :</label>
+    <select class="form-control select2 select2 mb-2" formControlName="Emp_id"   id="emp_det" style="width: 100%;"   >
+       <option selected value="">-- Select Employee --</option>
+       <option  *ngFor="let item of emp_details" value="{{item.ID}}">{{item.Employee_Name}}</option>
+    </select>
+  </div>
+    <div  style="text-align: center;">
+     <button class="btn btn-outline-primary mt-1 mb-1 " (click)="tasksheetEmployee();">Show</button> 
+    </div>
+<!-- <select id="emp_det" class="form-control" style="width: 100%;" tabindex="-1"
+   formControlName="emp_name">
+  <option selected value="">-- Select Employee --</option>
+  <option *ngFor="let item of emp_details" [value]="item.ID">{{item.Employee_Name}}</option>
+</select> -->
+
+</form>   
+<div class="from mt-5 border border-primary bottomparts" [ngClass]="isEmpSelected ? 'd-block':'d-none'">
+  <div class="row tbl_heading d-flex center mt-2  mb-2 border-bottom">
+    <h3 style="text-align: center;">Employee Tasksheet Data</h3>
+  </div>
+  <div class="row border-bottom mt-1">
+      <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-3">
+                <h4 style="color: #1b158c;"> Select Date :</h4>
+              </div>
+            <div class="col-sm-9">
+              <input id="start_date" placeholder="Select Date" type="text"
+               class="datepicker form-control start_date" data-provide="datepicker">
+              </div>
+          </div>
+        </div>
+        <div class="col-sm-2 btn_shows mb-1 ">
+          <button class="btn btn-outline-primary" (click)="showTasksheetDate();" >Show TaskSheet</button>
+        </div>
+  </div>
+  <div class="tbl_eom mt-2">
+    <table id="tbl_emp_data" class="table table-bordered table-striped">
+          <thead>
+              <tr class="table-light">
+                  <th class="centerliaze">Sr. No</th>
+                  <th class="centerliaze">Employee ID</th>
+                  <th class="centerliaze">Employee Name</th>
+                  <th class="centerliaze">Uploaded Date</th>
+                  <th class="centerliaze">Download TaskSheet</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let e of user_DataSheet; let i = index">
+                  <td class="centerliaze">{{ i+1 }}</td>
+                  <td class="centerliaze">{{ e.emp_id }}</td>
+                  <td class="centerliaze">{{ e.emp_name }}</td>
+                  <td class="centerliaze">{{ e.uploaded_date }}</td>       
+                  <td class="centerliaze">
+                    <i style="color: green ;"  (click)="downloadclk(e.emp_name,e.file_path,e.file_type)" class="bi bi-download" ></i>     
+                  </td>
+              </tr>
+              <tr   *ngIf="isDataAvail">
+                  <td style="text-align: center; "  colspan="5">Sorry There's No Data Avilable</td>
+              </tr>
+          </tbody>
+    </table>
+  </div>
+</div>
+<app-footer></app-footer>
+
+

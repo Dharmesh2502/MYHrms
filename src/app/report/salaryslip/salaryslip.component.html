@@ -1,0 +1,64 @@
+<app-header></app-header>
+<h1 class="text-center text-primary">Document</h1><br><br>
+
+<form  [formGroup]="DocForm" class="form-group">
+
+  <div  class="d-flex gap-5" style="margin-left: 110px;">  
+    <div class="small_controls mx-3">
+      <label>From-Date</label>
+      <input type="text"  class="form-control clsDatepickerFromDate" readonly data-provide="datepicker" placeholder="dd/mm/yyyy" formControlName="From_Date"
+      [ngClass]="{'is-invalid': DocDatadownloaded && val['From_Date'].errors }" />
+      <div *ngIf="DocDatadownloaded && val['From_Date'].errors" class="invalid-feedback">
+          <div *ngIf="val['From_Date'].errors['required']">From-Date is required</div>
+      </div>
+  </div> 
+
+  <div  class="small_controls mx-3">
+    <label>To-Date</label>
+    <input type="text"  class="form-control clsDatepickerToDate" readonly data-provide="datepicker" placeholder="dd/mm/yyyy" formControlName="To_Date"
+    [ngClass]="{'is-invalid': DocDatadownloaded && val['To_Date'].errors }" />
+    <div *ngIf="DocDatadownloaded && val['To_Date'].errors" class="invalid-feedback">
+        <div *ngIf="val['To_Date'].errors['required']">To-Date is required</div>
+    </div>
+  </div> 
+
+  <button type="button"  *ngIf="this.Showbtn" class="btn btn-primary" (click)="onShow()">Show</button>
+</div>
+
+
+</form><br>
+
+<div class="d-flex searchcs">
+  <div class="small_controls">
+    <input class="form-control" type="text" *ngIf="this.searchtxt"  [(ngModel)]="term" placeholder="Search Documents"  autocomplete="off"><br>
+    
+  </div>
+</div>
+<div class="container">
+  
+  <table  id="tabledata" *ngIf="this.tabledata"  class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+      <th>Sr No</th>
+      <th>Documents</th>
+      <th>Operation</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of data | filter:term; let id = index">
+        <td>{{ id+1 }}</td>
+        <td>{{ i.doc_name }}</td>
+        <td><button  type="button" (click)="onDownloadClick(i.filepath)" class="btn btn-primary">Download</button></td>
+      </tr>
+      <tr *ngIf="data == null">
+        <td colspan="3">
+          <h4>Documents Not Found..!</h4>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-footer></app-footer>

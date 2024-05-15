@@ -1,0 +1,106 @@
+<app-header></app-header>
+<div class="back_outer">
+<div class="container">
+    <div class="row justify-content-center">
+    <div class="col-md-5">
+     <div class="card">
+       <h2 class="card-title text-center">Add Vacancy</h2>
+        <div class="card-body py-md-4">
+         <form [formGroup]="VacancyForm" autocomplete="off">
+            <div class="form-group">
+               <input type="text" maxlength="30" formControlName="position_name"  class="form-control" placeholder="Enter Position Name" 
+               [ngClass]="{ 'is-invalid': vacformsub && val['position_name'].errors }"
+               >
+            <div *ngIf="vacformsub && val['position_name'].errors" class="invalid-feedback" >
+                <div *ngIf="val['position_name'].errors['required']">Position name is required</div>
+                <div *ngIf="val['position_name'].errors['pattern']">Only characters,space & specialcharacteres allowed</div>
+            </div>
+
+          </div>
+  
+          <div class="form-control">
+            <label class="form-label" for="form4Example2" >Location :- </label> &nbsp;
+              <input class="form-check-input me-2" (change)="onlocationcheck($event)" formControlName="location" type="checkbox" value="Ahmedabad" id="form4Example4"  />
+              <label class="form-check-label">
+                Ahmedabad
+              </label>&nbsp;
+
+              <input class="form-check-input me-2" (change)="onlocationcheck($event)" formControlName="location" type="checkbox" value="Pune" id="form4Example4"  />
+              <label class="form-check-label">
+                Pune
+              </label>&nbsp;
+
+              <input class="form-check-input me-2" (change)="onlocationcheck($event)" type="checkbox" formControlName="location"  value="Mumbai" id="form4Example4"  />
+              <label class="form-check-label">
+                Mumbai
+              </label>&nbsp;
+              <div [ngClass]="{ 'is-invalid' : vacformsub && val['location'].errors }"></div>
+             
+              <div class="invalid-feedback" *ngIf="this.VacancyForm.controls['checkArray'].errors?.['required']">
+                Checkbox is required,select atleast ane location
+              </div>
+            </div>
+                            
+
+            <div class="form-group">
+                <input type="text" maxlength="10" class="form-control" formControlName="experience" placeholder="Enter Experience"
+                [ngClass]="{ 'is-invalid': vacformsub && val['experience'].errors }"
+                >
+                <div *ngIf="vacformsub && val['experience'].errors" class="invalid-feedback" >
+                    <div *ngIf="val['experience'].errors['required']">Experience is required</div><br>
+                    <div *ngIf="val['experience'].errors['pattern']">Only characters,numbers & space allowed</div>
+                </div>
+           </div>
+
+     <div class="d-flex flex-row align-items-center justify-content-between">
+        <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+            </div>
+         </form>
+       </div>
+    </div>
+  </div>
+  </div>
+  </div><br><br><br>
+
+  <h2 class="card-title text-center"><u>Vacancy List</u></h2><br>
+
+  <div class="myclass">
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
+    <tr >
+      <th>ID</th>
+      <th>Position Name</th>
+      <th>Location</th>
+      <th>Experience</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <tr *ngIf="showdetails == null">
+      <td colspan="3"><span class="vac">Currently No Vacancy Added</span></td>
+    <td></td>
+    <td></td>
+  </tr>
+   
+  <tr *ngFor="let showvac of showdetails; let i = index">
+    <td>{{ i+1 }}</td>
+    <td>{{ showvac.position_name }}</td>
+    <td>{{ showvac.location }}</td>
+    <td>{{ showvac.experience }}</td>
+    <td>
+      <span *ngIf="showvac.status == 'y'">Active</span>
+      <span *ngIf="showvac.status == 'n'">In Active</span>
+    </td>
+    <td><button [disabled]="!(showvac.status == 'n')" class="btn btn-success" (click)="onActive(showvac.id)" >Active</button></td>
+    <td><button  [disabled]="!(showvac.status == 'y')" class="btn btn-warning" (click)="onInActive(showvac.id)">In-Active</button></td>
+    <td><button class="btn btn-danger" (click)="onDelete(showvac.id)">Delete</button></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div>
+  <app-footer></app-footer>
+

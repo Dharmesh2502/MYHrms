@@ -1,0 +1,44 @@
+<app-header></app-header>
+<div class="Dashboard-Outer">
+    <div class="gallery">
+        <app-slider></app-slider>
+    </div>
+    <div class="box-outer">
+    <div class="first-outer">
+        <div class="d-flex justify-content-center">
+            <app-employee-of-month></app-employee-of-month>
+        </div>
+        <div class="d-flex justify-content-center">         
+          <app-vacancydata></app-vacancydata>
+        </div>
+    </div>
+    <div class="second-outer">
+        <div class="event1">
+            <app-new-emp-join></app-new-emp-join>        
+        </div>
+        <div class="event">
+            <app-event-list></app-event-list>
+        </div>
+    </div>
+</div>
+</div>
+<!-- dinesh important notice model -->
+<div>
+    <div class="modal fade" id="importantNotice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        #content>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Important Notice</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <tr *ngFor="let notice of noticearr">
+                        <div innerHTML={{notice.notice}}></div>
+                    </tr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

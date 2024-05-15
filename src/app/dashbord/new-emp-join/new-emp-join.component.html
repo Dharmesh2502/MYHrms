@@ -1,0 +1,43 @@
+
+<div class="card mb-3"  style="max-width: 400px;">
+    <h6 style="text-align:center; margin-top:10px;">Let's Welcome</h6>
+    <div *ngIf="newempjoindata == null">
+        <span style="margin-left: 80px;"><b>No Employee join in Last 7 Days</b></span>
+    </div>
+   
+    <owl-carousel-o [options]="customOptions">
+        <ng-container *ngFor="let i of newempjoindata">
+            <ng-template carouselSlide>
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img [src]="i.Image" alt="image" class="stimg"> 
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">New Employee !</h5>
+          <div class="card-text">
+            <div class="new_emp_join">
+                <label>Name : </label>
+                <span>{{i.Employee_Name}}</span>
+            </div>
+            <div class="new_emp_join">
+                <label>Designation : </label>
+                <span>{{i.Desigination}}</span>
+            </div>
+            <div class="new_emp_join">
+                <label>DOJ : </label>
+                <span>{{i.DOJ | date : 'dd/MM/yyyy'}}</span>
+                <!-- <span>{{i.DOJ |  }}</span> -->
+            </div>
+            <div class="new_emp_join">
+                <label>Location : </label>
+                <span>{{i.Location}}</span>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    </ng-template>
+    </ng-container>
+</owl-carousel-o>
+  </div>

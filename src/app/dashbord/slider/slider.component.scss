@@ -1,0 +1,26 @@
+.slider-image{
+    height:200px;   
+}
+
+.slider-outer{
+    position: relative;
+    text-align: center;
+    color: white;
+
+}
+h5{
+    position: absolute;
+    bottom: 0.8%;
+    left: 46%;
+    transform: translate(-50%, -50%);
+}
+.owl-next {
+    position: absolute !important;
+    top: 100px !important;
+    right: 16px !important;
+}
+.nav-arrow-right{
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+}

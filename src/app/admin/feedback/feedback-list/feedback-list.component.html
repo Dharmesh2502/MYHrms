@@ -1,0 +1,51 @@
+<app-header></app-header>
+<div class="back_outer">
+<div class="container">
+    <form [formGroup]="Filledformlist">
+      <div class="form-group">
+            <select id="Department" formControlName="Department" (change)="on_ddl_change($event)"
+            [ngClass]="{ 'is-invalid': Filledformlistsubmitted && r['Department'].errors}">     
+              <option value="" class="text-primary font-weight-bolder ddl" disabled>Select Department</option>
+              <option *ngFor="let dept of posts" [value]="dept.dept_id">  
+                {{dept.dept_name}}             
+              </option>
+            </select>   
+            <div *ngIf="Filledformlistsubmitted && r['Department'].errors" class="invalid-feedback ">
+              <div *ngIf="r['Department'].errors['required']"> Please select your Department  </div>  
+            </div>
+            <select id="Module" formControlName="Module" (change)="on_mod_change($event)"
+            [ngClass]="{ 'is-invalid': Filledformlistsubmitted && r['Module'].errors}">     
+              <option value="" class="text-primary font-weight-bolder ddl" disabled>
+                ---Select Module---
+              </option>
+              <option *ngFor="let mod of post" [value]="mod.mod_id">  
+                {{mod.mod_name}}             
+              </option>
+            </select>   
+            <div *ngIf="Filledformlistsubmitted && r['Module'].errors" class="invalid-feedback">
+              <div *ngIf="r['Module'].errors['required']"> Please select your Module </div>  
+            </div>
+            <table class="table table-striped table-hover" *ngIf="!datanotfound">
+              <thead *ngIf="hideheaders">
+                <td>ID</td>
+                <td>Module Name</td>
+                <td>Duration</td>
+              </thead>
+              <tbody>
+              <tr *ngFor="let val of table" class="form-group" >
+              <td>{{ val.trainee_id }}</td>
+              <td>{{ val.mod_name }}</td>
+              <td>{{ val.duration }}</td>
+              <td>
+              <button class="btn-btn-primary" (click)="btn_view(val.trainee_id)">View details</button>
+              </tr>
+          </tbody>
+          </table>
+          <div *ngIf="datanotfound" style="text-align: center;">
+            <h5>No data available</h5>
+          </div>
+      </div>
+    </form>
+  </div>
+</div>
+  <app-footer></app-footer>

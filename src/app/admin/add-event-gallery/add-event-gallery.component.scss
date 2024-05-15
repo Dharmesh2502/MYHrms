@@ -1,0 +1,57 @@
+.event-image{
+    margin-left: 10%;
+    margin-right:1%;   
+}
+.add_images{
+    // display: flex;
+    //flex-wrap: nowrap; 
+    margin-top: 20px;
+}
+
+.add_images > div {
+   
+    margin: 10px;
+    text-align: center;
+    line-height: 30px;
+   
+  }
+.col{
+    margin-left: 10px;
+}
+.upload-image{
+    color: #fff;
+    background-color: #4285f4;
+    
+  
+}
+.images-list{
+    margin-top:5%;
+}
+
+
+.bi-trash{
+    font-size:x-large;
+    color: rgb(207, 20, 20);
+}
+
+.rounded{
+    height: 100px;
+    width:100px;
+}
+
+.loader-text{
+    margin-top: 60px !important;
+    font-size: x-large;
+}
+
+/*responsive css */ 
+@media only screen and (max-width: 600px) {
+    .form-control{
+        margin-top: 15px !important;
+    }
+    .upload-image{
+        width: 100px;
+        margin-left: 33%;
+        
+    }
+  }

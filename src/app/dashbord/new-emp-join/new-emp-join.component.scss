@@ -1,0 +1,51 @@
+.new_emp_join{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+}
+
+.parentdiv{
+     margin: 50px;
+     border-style: solid;
+     width:500px;
+}
+
+.imgdiv{
+    border-style: solid;
+    width:120px;
+    height: 150px;
+}
+
+.stimg{
+    width:115px;
+    height:144px;
+    padding-left: 10px;
+}
+
+.infodiv{
+    padding-left:10px;
+    
+}
+
+.mynewteamdiv{
+    margin-top: 20px;
+    margin-left:20px;
+    overflow:scroll;
+    width: 600px;
+    height: 200px;
+}
+
+.pdiv{
+    // width:500px;
+    border-style: solid;
+}
+
+.maindiv{
+    width:400px;
+    border-style: solid;
+}
+
+.slide{
+    margin-top: 10px;
+    margin-left: 10px;
+}

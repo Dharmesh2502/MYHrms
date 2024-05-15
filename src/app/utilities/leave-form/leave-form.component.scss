@@ -1,0 +1,62 @@
+.dates_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+h2 {
+    text-align: center;
+}
+
+tr>td {
+    text-align: left;
+    font-weight: bold;
+}
+
+pre {
+    text-align: left;
+    width: 300px;
+    height: 200px;
+    overflow: auto;
+}
+
+#floatingTextarea {
+    height: 10em;
+}
+
+.outer_divs {
+    box-shadow: 0px 0px 3px 1px black;
+    border-radius: 10px;
+}
+
+.auto_scroll {
+    overflow: auto;
+}
+
+.approve_btns {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.approve_btns>button {
+    width: 100%;
+    margin: 2px;
+}
+
+.errors {
+    color: red;
+    font-weight: bold;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.wordwrap{
+    word-wrap: break-word;
+    // min-width: 30vw !important;
+}

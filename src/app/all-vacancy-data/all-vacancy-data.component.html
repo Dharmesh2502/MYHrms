@@ -1,0 +1,25 @@
+<app-header></app-header>
+<div class="myclass back_outer"> 
+      <h5>VACANCY</h5>
+    <table class="table table-hover">
+      <thead>
+      <tr >
+        <th>Position</th>
+        <th>Location</th>
+        <th>Experience</th>
+      </tr>
+    </thead>
+    <tr *ngIf="showdetails == null">
+      <td colspan="3"><span class="vac">Currently No Vacancy Available</span></td>
+      <td></td>
+      <td></td>
+    </tr>
+      <tr *ngFor="let showvac of showdetails">
+        <td>{{ showvac.position_name }}</td>
+        <td>{{ showvac.location }}</td>
+        <td>{{ showvac.experience }}</td>
+        <td><button class="btn btn-primary" (click)="onrefer(showvac.id)" >Refer</button></td>
+      </tr>
+    </table>
+  </div>
+  <app-footer></app-footer>

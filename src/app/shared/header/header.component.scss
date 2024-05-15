@@ -1,0 +1,39 @@
+.container-fluid img{
+    width: 150px;
+}
+
+.navbar-nav{
+    padding-left: 30px;
+}
+
+.nav-link{
+    color:  #034EA2;
+    cursor: pointer;
+}
+
+.nav-link:hover{
+    color:  #034EA2;
+}
+
+.dropdown-menu:li {
+    text-align: left;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; 
+ }
+
+ #logoimg{
+    width: 200px;
+    padding: 30px;
+ }
+
+.logoutbtn{
+        color:  #034EA2;
+        font-size: 28px;
+        float: right;
+        padding-left: 220px;
+        display: flex;
+        justify-content: right !important;
+ }

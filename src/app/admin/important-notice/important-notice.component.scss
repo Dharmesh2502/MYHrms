@@ -1,0 +1,35 @@
+/* Style buttons */
+.btn {
+    background-color: DodgerBlue; /* Blue background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+  }
+  
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: RoyalBlue;
+  }
+
+  // .gradient-custom {
+  //   /* fallback for old browsers */
+  //   background: hsl(203, 77%, 65%);
+    
+  //   /* Chrome 10-25, Safari 5.1-6 */
+  //   background: -webkit-linear-gradient(to bottom right, rgb(255, 0, 0), rgb(196, 0, 29));
+    
+  //   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  //   background: linear-gradient(to bottom right, rgb(144, 228, 253), rgb(196, 117, 196))
+  //   }
+    
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    .card-registration .select-arrow {
+    top: 13px;
+    }

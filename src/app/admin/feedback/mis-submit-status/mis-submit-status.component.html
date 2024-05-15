@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div class="back_outer">
+<br>
+    <h3 style="text-align: center;" >MIS Submit Status</h3>
+<br>
+<div>
+    <select id="status" (change)="changeStatus($event)">
+        <option value="" selected disabled>Select status</option>
+        <option value="Submitted">Submitted data</option>
+        <option value="Not Submitted">Not submitted data</option>
+    </select>
+</div>
+<br>
+<div class="d-flex align-items-center">
+<table class="table table-striped" *ngIf="IsSelected">
+    <thead>
+        <tr class="table-primary">
+            <th scope="col">Sr. no.</th>
+            <th scope="col">Trainer name</th>
+            <th scope="col">Department name</th>
+
+            <th scope="col">Module name</th>
+            <th *ngIf="isSubmit" >Submitted count</th>
+            <th *ngIf="!isSubmit" scope="col">Not submitted count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let form of showarr ; let i = index">
+            <td scope="row">{{i+1}}</td>
+            <td class="table-success">{{form.emp_name}}</td>
+            <td class="table-success"> {{form.dept_name}}</td>
+            <td class="table-danger"> {{form.mod_name}}</td>
+            
+            <td *ngIf="isSubmit" class="table-info">{{form.Submitted}} </td> 
+            <td *ngIf="!isSubmit" class="table-info">{{form.Not_Submitted}} </td> 
+        </tr>
+         
+    </tbody>
+</table>
+</div>
+</div>
+<app-footer></app-footer>

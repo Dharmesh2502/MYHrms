@@ -1,0 +1,65 @@
+<app-header></app-header>
+<div class="back_outer">
+<ngx-spinner bdColor = "rgba(234,223,223,0.99)" size = "medium" color = "#4285f4" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: black;" class="loader-text">Loading....</p></ngx-spinner>
+<div class="event-image">
+    <h3>Add Event Gallery</h3>
+   
+  <form class="add_images" [formGroup]="event_gallery" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="row">
+    <div class="col-sm-4" > 
+      <input type="file" class="form-control custom" id="image" placeholder="Event Image" id="event_image" formControlName="event_image" (change)="handleFileInput($event)" 
+       [ngClass]="{'is-invalid':!isvalidFileType || !isvalidFileSize || isFileRequired}">
+      
+      <div *ngIf="!isvalidFileType || !isvalidFileSize || isFileRequired" class="invalid-feedback">
+        <div *ngIf="isFileRequired">
+          Image is required
+      </div>
+        <div *ngIf="!isvalidFileType">
+            File must be in jpeg/png format
+        </div>
+        <div *ngIf="!isvalidFileSize">
+          Image size cannot be > 1 MB
+      </div>
+       </div>
+      </div>
+      <div class="col-sm-4"><input type="text" class="form-control custom" placeholder="Add caption for image" formControlName="caption" maxlength="50"></div>
+      <div class="col-sm-1">
+      <button type="submit" class="form-control upload-image">Upload</button>
+      </div>
+    </div>
+  </form>
+  
+  <div class="images-list">
+    <h3>Event Gallery</h3>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Sr.no</th>
+              <th scope="col">Image</th>
+              <th scope="col">Caption</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="imageGalleryData==null || imageGalleryData ==undefined">
+              <td>No data found</td>
+            </tr>
+            <tr *ngFor="let item of imageGalleryData;let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td>
+              <div>
+              <img [src]="item.base64string" width="100px" height="100px" alt="...">
+              </div>
+            </td>
+              <td>{{item.image_caption}}</td>
+              <td><i class="bi bi-trash" (click)="deleteEventGallery(item.id)"></i></td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  </div>
+</div>
+  <app-footer></app-footer>
+  
+  
+  

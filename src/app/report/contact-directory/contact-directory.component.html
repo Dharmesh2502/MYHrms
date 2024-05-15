@@ -1,0 +1,47 @@
+<app-header></app-header>
+<div class="back_outer">
+<!-- datatable for contact directory -->
+<h1 class="text-center text-primary">Employee Contact Directory</h1><br>
+<br/>
+<div class="container">
+<div class="d-flex justify-content-center">
+  <select id="empname" (change)="empcontactinfo()">
+    <option selected disabled>Select Employee</option>
+    <option *ngFor="let data of EmpContactDetails" value="{{data.ID}}">{{data.Employee_Name}}</option>
+  </select>
+
+  <!-- <input type="text" (keyup)="getUserName()" id="userIdFirstWay" list="dynmicUserIds" />
+  <datalist id="dynmicUserIds">
+      <option *ngFor="let data of EmpContactDetails" (change)="empcontactinfo(data.ID)">{{data.Employee_Name}}</option>
+  </datalist> -->
+</div>
+  <table id="contact" class="table table-bordered table-striped table-hover" *ngIf="ExportBtn">
+    <thead>
+      <tr>
+      <th>Employee Code</th>
+      <th>Employee Name</th>
+      <th>Email</th>
+      <th>Designation</th>
+      <th>Department</th>
+      <th>Contact No.</th>  
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of empinfo">
+        <td>{{data.Employee_Code}}</td>
+        <td>{{data.Employee_Name}}</td>
+        <td>{{data.Official_EmaildID}}</td>
+        <td>{{data.Desigination}}</td>
+        <td>{{data.Department}}</td>
+        <td>{{data.Emerg_ConatactNumber}}</td>  
+        <td *ngIf="EmpContactDetails == null ">No Record Found</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- {{EmpContactDetails | json}} -->
+<div class="container" *ngIf="ExportBtn">
+  <input type="button" value="Export To Excel" (click)="exportExcel()"/>
+</div>
+</div>
+<app-footer></app-footer>

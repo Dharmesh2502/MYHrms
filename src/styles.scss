@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+.commonbutton{
+    border-radius: 0 !important;
+    font-size: 16px !important;
+    background-color: #034EA2 !important;
+    color: #fff !important;
+    &:hover{
+        color: #fff;
+        box-shadow: none !important;
+    }
+}
+.commontextbox{
+    height: 40px;
+    border-radius: 0 !important;
+    &:focus{
+        box-shadow: none !important;
+        border-color:#4285f4 ;
+    }
+
+}
+
+// button{
+//         background-color:  #4285f4 !important;
+// }
+
+.swal2-styled.swal2-confirm {
+    font-size: 12px !important;
+    background-color:  #034EA2 !important;
+    cursor: pointer !important;
+}
+
+.swal2-styled.swal2-cancel {
+    cursor: pointer !important;
+    background: initial;
+    background-color: #6e7881;
+    color: #fff;
+    font-size: 12px !important;
+}
+
+.back_outer{
+    // 
+     /* fallback for old browsers */
+     background: hsla(200, 10%, 82%, 0.753);
+    
+     /* Chrome 10-25, Safari 5.1-6 */
+     background: -webkit-linear-gradient(to bottom right, rgb(255, 0, 0), rgb(196, 0, 29));
+     
+     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+     background: linear-gradient(to bottom right, #f1f1f1, #f1f1f1)
+}
+
+// .swal2-styled.swal2-confirm {
+//     border: 0;
+//     border-radius: 0.25em;
+//     background: initial;
+//     background-color: #034EA2 !important;
+//     color: #fff;    
+//     font-size: 1em;
+// }

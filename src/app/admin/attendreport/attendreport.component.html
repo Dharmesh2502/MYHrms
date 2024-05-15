@@ -1,0 +1,51 @@
+<app-header></app-header>
+<div class="back_outer">
+    <div class="outer">
+    <form action="" class="form-group" [formGroup]="AttendForm">
+        <h2>Attendance report</h2>
+        <div class="controls">
+            <div class="small_controls mx-3">
+                <h4>Employee</h4>
+                <select name="" id="" class="form-control employee" formControlName="emp">
+                    <option value="--select--" selected>--select--</option>
+                    <option value="{{item.Name}}" *ngFor="let item of Emp_Table">{{item.Name}}</option>
+                </select>
+            </div>
+            <div class="small_controls mx-3">
+                <h4>From Date</h4>
+                <input type="text" name="" id="" class="fromdatepicker form-control" formControlName="from" readonly
+                    (click)="changeDates()">
+            </div>
+            <div class="small_controls mx-3">
+                <h4>To Date</h4>
+                <input type="text" name="" id="" class="todatepicker form-control" formControlName="to" readonly
+                    (click)="changeDates()">
+            </div>
+
+        </div>
+        <br><br>
+        <div *ngIf="Temp_Attend_Table?.length > 0">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Contact Number</th>
+                        <th>Official ID</th>
+                        <th>Sign In</th>
+                        <th>Sign Out</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of Temp_Attend_Table">
+                        <td>{{item.Contact_No}}</td>
+                        <td>{{item.Official_ID}}</td>
+                        <td>{{item.Sign_In | date:'dd/MM/YYYY - HH:mm:ss'}} </td>
+                        <td>{{item.Sign_Out | date:'dd/MM/YYYY - HH:mm:ss'}} </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success" (click)="ExportData()" type="button">Export to Excel</button>
+        </div>
+    </form>
+</div>
+</div>
+<app-footer></app-footer>

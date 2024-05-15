@@ -1,0 +1,36 @@
+
+<div class="d-flex justify-content-center">
+    <h5>EMPLOYEE OF THE MONTH</h5>
+</div>
+<div class="main_div">
+    <owl-carousel-o [options]="customOptions">
+        <ng-container *ngFor="let slide of emp_data;">
+            <ng-template carouselSlide [id]="slide.id">
+                <div class="slide">
+                   
+                        <div class="slider_title">
+                            <span>{{slide['title']}}</span>
+                        </div>
+                        <div class="mt-4">
+                            <img *ngIf="slide['img_path'] != ''"  [src]="slide['img_path']" alt="photo not found" class="rounded mx-auto img_sqr">
+                            <img *ngIf="slide['img_path'] == ''" src="../../../assets/images/dummyImg.png" class="rounded">
+                        </div>
+                        <div class="mt-4 description">
+                            <div class="align_emp_data">
+                                <label>Name : </label>
+                                <span>{{slide['emp_name']}}</span>
+                            </div>
+                            <div class="align_emp_data">
+                                <label>Department : </label>
+                                <span>{{slide['dept_name']}}</span>
+                            </div>
+                            <div class="align_emp_data">
+                                <label>Designation : </label>
+                                <span>{{slide['designation']}}</span>
+                            </div>
+                        </div>
+                    </div>
+            </ng-template>
+        </ng-container>
+    </owl-carousel-o>
+</div> 

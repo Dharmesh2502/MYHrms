@@ -1,0 +1,80 @@
+.main_div{
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 4px 4px #888888;
+        background-image:  linear-gradient(to bottom, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 1)),url("../../../assets/images/eom_bg2.jpg");
+        width: 300px;
+        height: 400px;
+    }
+
+.slider_title{
+    display: flex !important;
+    justify-content: center !important;
+    font-style: italic;
+    font-weight: 700;
+    color: white;
+}
+
+.img_div{
+    display: flex  !important;
+    justify-content: center  !important;
+}
+.img_sqr{
+    width: 150px !important; 
+    height: 200px;
+    border-radius: 20px;
+    padding: 10px;
+}
+.description{
+        text-align: center !important;
+        font-style: italic;
+        font-weight: 500;
+        color: white;
+}
+
+// span{
+  
+//     font-style: italic;
+//     font-weight: 500;
+// }
+.align_emp_data{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.img_square{
+    width: 130px;
+    height: 150px;
+    border: 1px solid black;
+    margin-right: 30px;
+}
+
+.owl-nav {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+
+    .owl-prev, .owl-next {
+        position: absolute;
+        height: 100px;
+        color: inherit;
+        background: none;
+        border: none;
+        z-index: 100;
+
+        i {
+            font-size: 2.5rem;
+            color: #cecece;
+        }
+    }
+
+    .owl-prev {
+        left: 0;
+    }
+
+    .owl-next {
+        right: 0;
+    }
+}

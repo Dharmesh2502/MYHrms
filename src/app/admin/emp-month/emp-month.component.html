@@ -1,0 +1,205 @@
+<app-header></app-header>
+<div class="back_outer">
+<div>
+    <h4 style="text-align: center; padding-top: 30px">
+        Choose EMPLOYEE of the month !!!
+    </h4>
+</div>
+<div class="d-flex justify-content-center mt-4">
+    <form [formGroup]="EmpForm" autocomplete="off">
+        <div class="form-group">
+            <div>
+                <label>Title : </label>
+            </div>
+            <div class="mt-2">
+                <input type="text" class="form-control" formControlName="title"
+                    placeholder="Example : Corporate-Technical"
+                    [ngClass]="{ 'is-invalid': EmpFormSubmitted && r['title'].errors }" />
+                <div *ngIf="EmpFormSubmitted && r['title'].errors" class="invalid-feedback">
+                    <div *ngIf="r['title'].errors['required']">Title is required</div>
+                    <div *ngIf="r['title'].errors['pattern']">Please enter valid title</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <div>
+                <label>Name : </label>
+            </div>
+            <div class="mt-2">
+                <input type="text" class="form-control" formControlName="emp_name" placeholder="Enter employee name"
+                    [ngClass]="{ 'is-invalid': EmpFormSubmitted && r['emp_name'].errors }" />
+                <div *ngIf="EmpFormSubmitted && r['emp_name'].errors" class="invalid-feedback">
+                    <div *ngIf="r['emp_name'].errors['required']">
+                        Employee name is required
+                    </div>
+                    <div *ngIf="r['emp_name'].errors['pattern']">
+                        Please enter valid employee name
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <div>
+                <label>Department : </label>
+            </div>
+            <div class="mt-2">
+                <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter department name"
+                    [ngClass]="{
+              'is-invalid': EmpFormSubmitted && r['dept_name'].errors
+            }" />
+                <div *ngIf="EmpFormSubmitted && r['dept_name'].errors" class="invalid-feedback">
+                    <div *ngIf="r['dept_name'].errors['required']">
+                        Department name is required
+                    </div>
+                    <div *ngIf="r['dept_name'].errors['pattern']">
+                        Please enter valid department name
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <div>
+                <label>Designation : </label>
+            </div>
+            <div class="mt-2">
+                <input type="text" class="form-control" formControlName="designation" placeholder="Enter designation"
+                    [ngClass]="{
+              'is-invalid': EmpFormSubmitted && r['designation'].errors
+            }" />
+                <div *ngIf="EmpFormSubmitted && r['designation'].errors" class="invalid-feedback">
+                    <div *ngIf="r['designation'].errors['required']">
+                        Designation name is required
+                    </div>
+                    <div *ngIf="r['designation'].errors['pattern']">
+                        Please enter valid designation
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <div>
+                <label>From Date :</label>
+            </div>
+            <div class="mt-2">
+                <input type="text" readonly class="form-control clsDatePickerDOB" formControlName="eom_date"
+                    placeholder="DD/MM/YYYY" data-provide="datapicker"
+                    [ngClass]="{ 'is-invalid': EmpFormSubmitted && r['eom_date'].errors }" />
+                <!-- <i class="bi bi-calendar cal" style="font-size: 22px;"></i> -->
+                <!-- <span id="boot-icon" class="bi bi-calendar"  style="font-size: 22px;"></span> -->
+                <div *ngIf="EmpFormSubmitted && r['eom_date'].errors" class="invalid-feedback">
+                    <div *ngIf="r['eom_date'].errors['required']">Date is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <div>
+                <label>Upload Photo :</label>
+            </div>
+            <div class="mt-2">
+                <input type="file" class="form-control" formControlName="img_path" placeholder="Upload File"
+                    [ngClass]="{ 'is-invalid': EmpFormSubmitted && r['img_path'].errors }"
+                    (change)="handleFileInput($event)" />
+                <div *ngIf="EmpFormSubmitted && r['img_path'].errors" class="invalid-feedback">
+                    <div *ngIf="r['img_path'].errors['required']">Photo is required</div>
+                </div>
+                <div class="mt-1">
+                    <label style="font-style: italic; color:red;font-weight: 400;">Hint : Only jpeg / jpg or png files are alllowed.</label>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around mt-4">
+            <button style="padding: 6px 35px 6px 35px" type="submit" class="btn btn-primary" (click)="submit()">
+                Submit
+            </button>
+            <!-- <button type="submit" (click)="previewEOM_Data()" style="padding: 6px 35px 6px 35px"
+                class="btn btn-secondary">Preview</button> -->
+        </div>
+    </form>
+</div>
+
+
+<div class="tbl_heading">
+    <h4>Employee of month data !!!</h4>
+</div>
+<div class="tbl_eom">
+    <table id="tbl_emp_data" class="table table-bordered table-striped">
+        <thead>
+            <tr class="table-dark">
+                <th>Sr. No</th>
+                <th>Title</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>EOM Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of emp_data; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ e.title }}</td>
+                <td>{{ e.emp_name }}</td>
+                <td>{{ e.dept_name }}</td>
+                <td>{{ e.designation }}</td>
+                <td>{{ e.eom_date | date : 'dd/MM/YYYY' }}</td>
+                <td (click)="removeIt(e.id)">
+                    <span id="boot-icon" class="bi bi-trash"
+                        style="font-size: 26px; color: rgb(255, 0, 0)"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+<!-- Scrollable modal -->
+<!-- <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">
+                    Employee of Month Details
+                </h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="tbl_emp_data" class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="table-dark">
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Employee</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>EOM Date</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let e of emp_data; let i = index">
+                            <td>{{ e.id }}</td>
+                            <td>{{ e.title }}</td>
+                            <td>{{ e.emp_name }}</td>
+                            <td>{{ e.dept_name }}</td>
+                            <td>{{ e.designation }}</td>
+                            <td>{{ e.eom_date | date }}</td>
+                            <td (click)="removeIt(e.id)">
+                                <span id="boot-icon" class="bi bi-trash"
+                                    style="font-size: 26px; color: rgb(255, 0, 0)"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div> -->
+<app-footer></app-footer>

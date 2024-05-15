@@ -1,0 +1,52 @@
+<app-header></app-header>
+<div class="back_outer">
+<div class="header">
+    <h1> Admin Dashboard</h1>
+</div>
+<div class="d-flex justify-content-center">   
+<div class="tbl_mapping">
+    <form [formGroup]="mappingReport">
+        <table id="tableid" class="table table-striped table-bordered table-hover  tbl_mapping">
+            <thead>
+                <tr>
+                    <th>Sr.No.</th>
+                    <th>ID</th>
+                    <th>Name</th>                   
+                    <th>Email Id </th>
+                    <th>Reporting Manager</th>
+                    <th>View Profile</th>
+                    <th>Map Reporting Manager</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of EMP ; let i= index" (click)="getSelectedId(item.ID)">
+                    <td>{{i+1}}</td>
+                    <td #id>{{item.ID}}</td>
+                    <td>{{item.Employee_Name}}</td>                    
+                    <td>{{item.Official_EmaildID}}</td>
+                    <td>{{item.Reporting_Name}}</td>
+                    <td>
+                        <div class="btn">
+                            <button class="btn btn-dangerous " (click)="showProfile(item.ID)">View</button>
+                        </div>
+                    </td>
+                    <td class="d-flex select">
+                        <div>
+                            <select class="form-control ddl_rep" formControlName="Report_manger" (focus)="BindData(item.ID)">
+                                <option value="" Selected disabled>select-Reporter</option>
+                                <option value="{{rep.ID}}" *ngFor="let rep of Reporter" >
+                                    {{rep.Reporting_Manager}}</option>
+                            </select>
+                        </div>
+                        <div class="btn">
+                            <button class="btn btn-primary " (click)="onSave(item.id)">Save</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</div>
+</div>
+<app-footer></app-footer>

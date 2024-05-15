@@ -1,0 +1,25 @@
+<app-header></app-header>
+<div class="back_outer">
+<table class="table table-striped">
+    <thead>
+        <tr class="table-primary">
+            <th scope="col">Sr.no.</th>
+            <th scope="col">Employee name</th>
+            <th scope="col">Contact number</th>
+            <th scope="col">Email</th>
+            <th scope="col">View</th>  
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let form of grievancearr ; let i = index">
+            <!-- <td scope="row">{{victim.id}}</td> -->
+            <td scope="row">{{i+1}}</td>
+            <td class="table-success">{{form.Employee_Name}}</td>
+            <td class="table-danger"> {{form.Contact_Number}}</td>
+            <td class="table-info">{{form.Email_id}} </td>
+            <td><button class="btn btn-info" (click)="onView(form.id)" *ngIf="isData" >view</button></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<app-footer></app-footer>

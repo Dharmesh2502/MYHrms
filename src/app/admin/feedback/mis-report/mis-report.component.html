@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="container">
+    <form action="" class="form-group">
+        <br>
+        <div>
+            <h2>MIS Report</h2>
+        </div>
+        <div class="ddl_div">
+            <div class="select_div mx-5 my-3">
+                <h3>Department</h3>
+                <select name="" id="" class="form-control departddl" #departID>
+                    <option value="--select--">--select--</option>
+                    <option value="{{item.dept_id}}" *ngFor="let item of depart">{{item.dept_name}}</option>
+                </select>
+            </div>
+            <div class="select_div mx-5 my-3" *ngIf="showmod">
+                <h3>Module</h3>
+                <select name="" id="" class="form-control modddl" #modID (change)="changeMod(modID.value)">
+                    <option value="--select--">--select--</option>
+                    <option value="{{item.mod_id}}" *ngFor="let item of module">{{item.mod_name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="mis_table">
+            <table class="table table-striped table-bordered" *ngIf="Report?.length > 0">
+                <thead>
+                    <tr>
+                        <th>Module Name</th>
+                        <th *ngIf="HideByMod">Trainee ID</th>
+                        <th>Employee Name</th>
+                        <th *ngIf="HideByMod">Rating</th>
+                        <th *ngIf="!HideByMod">Rating</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="showRepor_tbl">
+                    <tr *ngFor="let item of Report">
+                        <td>{{item.mod_name}}</td>
+                        <td *ngIf="HideByMod">{{item.trainee_id}}</td>
+                        <td>{{item.emp_name}}</td>
+                        <td *ngIf="HideByMod">{{item.rating | number:'1.2-3'}}</td>
+                        <td *ngIf="!HideByMod">{{item.ratings | number:'1.2-3'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn btn-success" *ngIf="Report?.length > 0" type="button" (click)="ExportReport()">Export to Excel</button>
+    </form>
+</div>
+<app-footer></app-footer>

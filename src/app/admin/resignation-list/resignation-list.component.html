@@ -1,0 +1,73 @@
+
+<!-- <app-header></app-header>
+<table class="mt-5 table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mobile No</th>
+            <th>Department Name</th>
+            <th>Designation</th>
+            <th>Reason For Resign</th>
+            <th>Date Of Resign</th>
+            <th>Last Date of Work</th>
+             <th>Employee_Code</th> 
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr *ngIf="noresign;">
+            <td colspan="8" style="text-align: center;">Currently Resign data added</td>
+        </tr>
+        <tr *ngFor="let e of showresignemplist; let i = index" >
+            <td>{{i+1}}</td>
+            <td>{{e.Employee_Name}}</td>
+            <td>{{e.Contact_Number}}</td>
+            <td>{{e.Department}}</td>
+            <td>{{e.Desigination}}</td>
+            <td>{{e.reason_of_leave}}</td>
+            <td>{{e.date_of_resign | date : 'dd/MM/yyyy'}}</td>
+            <td>{{e.last_day_work | date : 'dd/MM/yyyy'}}</td>
+     <td>e.Employee_Code}}</td> 
+        </tr>
+    </tbody>
+</table>
+<app-footer></app-footer>
+-->
+
+<app-header></app-header>
+<table class="mt-5 table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mobile No</th>
+            <th>Department Name</th>
+            <th>Designation</th>
+            <th>Reason For Resign</th>
+            <th>Date Of Resign</th>
+            <th>Last Date of Working</th>
+            <th>Operation</th>
+            <!-- <th>Employee_Code</th> -->
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr *ngIf="noresign;">
+            <td colspan="8" style="text-align: center;">Currently No Resign Data Added</td>
+        </tr>
+        <tr *ngFor="let e of showresignemplist; let i = index" >
+            <td>{{i+1}}</td>
+            <td>{{e.Employee_Name}}</td>
+            <td>{{e.Contact_Number}}</td>
+            <td>{{e.Department}}</td>
+            <td>{{e.Desigination}}</td>
+            <td>{{e.reason_of_leave}}</td>
+            <td>{{e.date_of_resign | date : 'dd/MM/yyyy'}}</td>
+            <td>{{e.last_day_work | date : 'dd/MM/yyyy'}}</td>
+            <td><button class="btn btn-primary" (click)="deleteresign(e.Employee_Code)">Delete</button></td>
+            <!-- <td>e.Employee_Code}}</td> -->
+        </tr>
+    </tbody>
+</table>
+<app-footer></app-footer>

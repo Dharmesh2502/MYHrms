@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="back_outer">
+    <h1 class="accordion-header" id="headingOne">Add New Department
+    </h1><br>
+                <form [formGroup]="DepartmentForm"> 
+                    <input type="text"  id="email" class="form-control" formControlName="dept_name" placeholder="Enter Department Name"
+                    [ngClass]="{ 'is-invalid': adddeptformsub && val['dept_name'].errors }"
+                    >
+                    <div *ngIf="adddeptformsub && val['dept_name'].errors" class="invalid-feedback" >
+                        <div *ngIf="val['dept_name'].errors['required']">DepartmentName is required</div>
+                        <div *ngIf="val['dept_name'].errors['pattern']">Only characters,space & specialcharacteres allowed</div>
+                    </div>
+                    <br>
+                <button type="button" Class="btn btn-primary" (click)="onAdd()"> Add </button>
+            </form>
+</div>
+<app-footer></app-footer>
+            

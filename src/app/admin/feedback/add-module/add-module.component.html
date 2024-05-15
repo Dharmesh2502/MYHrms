@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="back_outer">
+            <h1 class="accordion-header" id="headingOne">Add New Module
+            </h1><br>
+                        <form [formGroup]="ModuleForm"> 
+                            <select id="dept"  formControlName="dept_id" 
+                            [ngClass]="{ 'is-invalid': addmodformsub && val['dept_id'].errors }"
+                            >
+                                <option value="" disabled>Select Department</option>
+                                <option *ngFor="let ddl of showdetails" value={{ddl.dept_id}}>
+                                    {{ddl.dept_name}}
+                                </option>
+                            </select><br><br>
+
+                            <div *ngIf="addmodformsub && val['dept_id'].errors" class="invalid-feedback" >
+                                <div *ngIf="val['dept_id'].errors['required']">Please select separtment first</div>
+                            </div>
+
+
+
+                            <input type="text"  id="email" formControlName="mod_name" placeholder="Enter Module Name"
+                            [ngClass]="{ 'is-invalid': addmodformsub && val['mod_name'].errors }"
+                            >
+
+                            <div *ngIf="addmodformsub && val['mod_name'].errors" class="invalid-feedback" >
+                                <div *ngIf="val['mod_name'].errors['required']">Module name is required</div>
+                                <div *ngIf="val['mod_name'].errors['pattern']">Only characters,space & specialcharacteres allowed</div>
+                            </div>
+                            
+                            <br><br>     
+                     
+                        <button type="button" Class="btn btn-primary" (click)="onAdd()"> Add </button>
+                    </form>
+</div>
+<app-footer></app-footer>
+              
+        

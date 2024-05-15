@@ -1,0 +1,36 @@
+.Dashboard-Outer{
+  background: #fafafa;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 30px;
+    text-align: center;
+
+  } 
+
+  .flex-containers {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-left: 350px;
+  }
+  
+  .eventbtn{
+    background-color: black;
+    color: white;
+    padding: 10px 10px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+  }
+
+  .calenderbox{
+    width:350px;
+    margin-left: 90px;
+  }
+
+  .header{
+    text-align: center;
+  }

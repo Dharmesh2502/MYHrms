@@ -1,0 +1,39 @@
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30px;
+  text-align: center;
+  margin-left: 500px;
+  padding-top: 10px;
+} 
+
+.flex-containers {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+.flex-item-left {
+  background-color: #fafafa;
+  padding: 10px;
+  flex: 50%;
+  align-content: center;
+}
+
+.flex-item-right {
+  background-color: #fafafa;
+  padding: 10px;
+  flex: 50%;
+  align-items: center;
+}
+.eventbtn{
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+
+

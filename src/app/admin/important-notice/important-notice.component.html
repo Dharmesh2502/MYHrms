@@ -1,0 +1,105 @@
+<app-header></app-header>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--  here i used inner html for future use when admin adds html text in notice otherwise by defualt we use -->
+<!-- edit notice form -->
+<div class="back_outer">
+<section class="vh-150 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Add Notice</h3>
+                        <form [formGroup]="NoticeForm" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="start_date"><b> Start Date </b></label>
+                                        <input id="start_date" placeholder="Select Date" type="text"
+                                            formControlName="start_date" class="datepicker form-control form-control-lg"
+                                            data-provide="datepicker" readonly
+                                            [ngClass]="{'is-invalid': NoticeFormSubmited && r['start_date'].errors}" />
+                                        <div *ngIf="NoticeFormSubmited && r['start_date'].errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="r['start_date'].errors['required']">Start date is required
+                                            </div>
+                                        </div>                      
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="end_date"><b> End Date </b></label>
+                                        <input id="end_date" placeholder="Select Date" type="text"
+                                            formControlName="end_date" class="datepicker form-control form-control-lg"
+                                            data-provide="datepicker" readonly
+                                            [ngClass]="{'is-invalid': NoticeFormSubmited && r['end_date'].errors}" />
+                                        <div *ngIf="NoticeFormSubmited && r['end_date'].errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="r['end_date'].errors['required']">End date is required </div>                                         
+                                        </div>                              
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ckediter -->
+                            <label class="form-label" for="end_date"><b> Notice </b></label>
+                            <div class="form-outline">
+                                <ckeditor #editor formControlName="notice" id="notice" 
+                                    [ngClass]="{'is-invalid': NoticeFormSubmited && r['notice'].errors}">
+                                </ckeditor>
+                                <div *ngIf="NoticeFormSubmited && r['notice'].errors" class="invalid-feedback">
+                                    <div *ngIf="r['notice'].errors['required']">Notice is Required </div>
+                                </div>
+
+                            </div>
+                            <!-- Submit BUTTON -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <div class="mt-4 pt-2">
+                                            <input class="btn btn-primary btn-lg" type="submit" (click)="onAddNotice()"
+                                                value="Submit" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <div class="mt-4 pt-2">
+                                            <input class="btn btn-primary btn-lg" type="submit"
+                                                (click)="onUpdateNotice()" value="Update Notice" />
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <table datatable [dtOptions]="dtOptions" class="table table-striped"> -->
+<table class="table table-striped">
+    <thead>
+        <tr class="table-primary">
+            <th scope="col">Sr. no.</th>
+            <th scope="col">Notice Description</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let notice of noticeArr; trackBy: trackByData;let i = index">
+            <td scope="row">{{i + 1}}</td>
+            <td innerHtml={{notice.notice}} class="table-primary"></td>
+            <td class="table-success">{{notice.start_date | date:'dd/MM/YYYY'}}</td>
+            <td class="table-danger"> {{notice.end_date | date:'dd/MM/YYYY'}}</td>
+            <!-- <td><input class="btn btn-primary btn-lg" type="Edit" (click)="onEditeNotice(notice.id)"
+                    value="Edit Notice" /></td> -->
+            <td><button class="btn" (click)="onDeleteNotice(notice.id)" *ngIf="isData"><i
+                        class="fa fa-trash" ></i></button></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<app-footer></app-footer>

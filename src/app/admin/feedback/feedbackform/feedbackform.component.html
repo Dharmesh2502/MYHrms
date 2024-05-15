@@ -1,0 +1,368 @@
+<app-header></app-header>
+<div class="back_outer">
+<form [formGroup]="feedbackForm" *ngIf="!isSuccessfullSubmit && isAccess" class="mt-2" id="feedbackform" autocomplete="off">
+    <br>
+    <div style="text-align: center;">
+        <h3>Training Evaluation Form</h3>
+    </div>
+    <br>
+    <div *ngIf="!isAdmin">
+        <p><b> Please share honest feedback for us so we can improve.</b></p>
+    </div>
+    <br>
+    <!-- 1,2,3 -->
+    <div>
+        <label><b>1. Department Name :</b></label>
+        <div>
+            <select id="ddldepartment" formControlName="ddlDepartment" class="form-control"
+                [ngClass]="{'is-invalid': feedbackFormSubmited && r['ddlDepartment'].errors}"
+                (change)="ddlDepartmentChang($event)">
+                <option value="">Select Department</option>
+                <option *ngFor="let dept of ddlDepartment" value={{dept.dept_id}}>{{dept.dept_name}}</option>
+            </select>
+            <div *ngIf="feedbackFormSubmited && r['ddlDepartment'].errors" class="invalid-feedback">
+                <div *ngIf="r['ddlDepartment'].errors['required']">Department is required </div>
+            </div>
+        </div>
+        <br>
+        <label><b>2. Module Name :</b></label>
+        <select id="ddlModuleName" formControlName="ddlModuleName" class="form-control"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['ddlModuleName'].errors}">
+            <option value="">Select Module</option>
+            <option *ngFor="let mod of ddlModule" value={{mod.mod_id}}>{{mod.mod_name}}</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['ddlModuleName'].errors" class="invalid-feedback">
+            <div *ngIf="r['ddlModuleName'].errors['required']">Module required </div>
+        </div>
+        <br>
+        <label><b>3. Who facilitated this training ? :</b></label>
+        <select id="ddlTrainer" formControlName="ddlTrainer" class="form-control"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['ddlTrainer'].errors}">
+            <option value="">Select Trainee</option>
+            <option *ngFor="let emp of ddlEmployee" value={{emp.emp_id}}>{{emp.emp_name}}</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['ddlTrainer'].errors" class="invalid-feedback">
+            <div *ngIf="r['ddlTrainer'].errors['required']">Trainer is required </div>
+        </div>
+        <br>
+    </div>
+ 
+    <!-- 4,5 -->
+    <div class="row">
+        <div class="col-4">
+            <label><b>4. Start Date : </b></label>
+            <input type="text" id="StartDate" placeholder="Select Date" formControlName="StartDate"
+                class="datepicker form-control form-control" data-provide="datepicker" readonly
+                [ngClass]="{'is-invalid': feedbackFormSubmited && r['StartDate'].errors}" />
+            <div *ngIf="feedbackFormSubmited && r['StartDate'].errors" class="invalid-feedback">
+                <div *ngIf="r['StartDate'].errors['required']">Start date is required </div>
+            </div>
+        </div>
+        <div class="col-1">
+        </div>
+        <div class="col-4">
+            <label><b>5.End Date:</b></label>
+            <input type="text" id="EndDate" placeholder="Select Date" formControlName="EndDate"
+                class="datepicker form-control form-control" data-provide="datepicker" readonly
+                [ngClass]="{'is-invalid': feedbackFormSubmited && r['EndDate'].errors}" />
+            <div *ngIf="feedbackFormSubmited && r['EndDate'].errors" class="invalid-feedback">
+                <div *ngIf="r['EndDate'].errors['required']">End date is required </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    
+    <!-- 6 -->
+    <div><b>6. Where did the training happen ?</b></div>
+    <div class="row">
+        <div class="col-4">
+            <label>State :</label>
+            <div>
+                <select class="form-control" id="State" formControlName="State"
+                    [ngClass]="{'is-invalid': feedbackFormSubmited && r['State'].errors}"
+                    (change)="onStateChange($event)">
+                    <option value="" disabled>-- Select State -- </option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Maharastra">Maharastra</option>
+                </select>
+                <div *ngIf="feedbackFormSubmited && r['State'].errors" class="invalid-feedback">
+                    <div *ngIf="r['State'].errors['required']">State is required </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-4">
+            <label>City :</label>
+            <div>
+                <select class="form-control" id="City" formControlName="City"
+                    [ngClass]="{'is-invalid': feedbackFormSubmited && r['City'].errors}">
+                    <option value="" disabled>-- Select City -- </option>
+                    <option *ngFor="let city of city" value={{city.value}}>{{city.value}}</option>
+                </select>
+                <div *ngIf="feedbackFormSubmited && r['City'].errors" class="invalid-feedback">
+                    <div *ngIf="r['City'].errors['required']">City is required </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    
+    <!-- 7 -->
+    <div class="row">
+        <div class="col-4">
+            <label><b>7. Mode of training (Online / Offline) :</b></label>
+            <div>
+                <select class="form-control" id="ModeOfTraining" formControlName="ModeOfTraining"
+                    [ngClass]="{'is-invalid': feedbackFormSubmited && r['ModeOfTraining'].errors}">
+                    <option value="" disabled>-- Select-- </option>
+                    <option value="y">Online</option>
+                    <option value="n">Offline</option>
+                </select>
+                <div *ngIf="feedbackFormSubmited && r['ModeOfTraining'].errors" class="invalid-feedback">
+                    <div *ngIf="r['ModeOfTraining'].errors['required']">* Please select online or offline</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- 8 -->
+    <div>
+        <label><b>8. What 3 things did you enjoy most about the training ?</b></label>
+        <br>
+        <label><b>A.</b></label>
+        <input type="text" id="EnjoyMostAboutTraining1" formControlName="EnjoyMostAboutTraining1" class="form-control"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['EnjoyMostAboutTraining1'].errors}" />
+        <div *ngIf="feedbackFormSubmited && r['EnjoyMostAboutTraining1'].errors" class="invalid-feedback">
+            <div *ngIf="r['EnjoyMostAboutTraining1'].errors['required']">This field is required </div>
+            
+        </div>
+        <br>
+        <label><b>B.</b></label>
+        <input type="text" id="EnjoyMostAboutTraining2" formControlName="EnjoyMostAboutTraining2" class="form-control"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['EnjoyMostAboutTraining2'].errors}" />
+        <div *ngIf="feedbackFormSubmited && r['EnjoyMostAboutTraining2'].errors" class="invalid-feedback">
+            <div *ngIf="r['EnjoyMostAboutTraining2'].errors['required']">This field is required </div>
+
+       
+        </div>
+        <br>
+        <label><b>C.</b></label>
+        <input type="text" id="EnjoyMostAboutTraining3" formControlName="EnjoyMostAboutTraining3" class="form-control"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['EnjoyMostAboutTraining3'].errors}" />
+        <div *ngIf="feedbackFormSubmited && r['EnjoyMostAboutTraining3'].errors" class="invalid-feedback">
+            <div *ngIf="r['EnjoyMostAboutTraining3'].errors['required']">This field is required </div>
+          
+        </div>
+    </div>
+    <br>
+    <!-- 9 -->
+    <div>
+        <label><b>9. How can we improve training ?</b></label>
+        <br>
+        <textarea id="ImproveTraining" cols="60" rows="4" formControlName="ImproveTraining" class="form-control"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['ImproveTraining'].errors}"></textarea>
+        <div *ngIf="feedbackFormSubmited && r['ImproveTraining'].errors" class="invalid-feedback">
+            <div *ngIf="r['ImproveTraining'].errors['required']">This field is required </div>
+          
+        </div>
+    </div>
+    <br>
+    <!-- 10 -->
+    <div>
+        <label><b>10. What information / skills did you learn that you will always apply at work ?</b></label>
+        <br>
+        <textarea name="SkillsLearn" cols="60" rows="4" formControlName="SkillsLearn" class="form-control"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['SkillsLearn'].errors}"></textarea>
+        <div *ngIf="feedbackFormSubmited && r['SkillsLearn'].errors" class="invalid-feedback">
+            <div *ngIf="r['SkillsLearn'].errors['required']">This field is required </div>
+          
+        </div>
+    </div>
+    <br>
+
+    <!-- ratings -->
+    <div>
+        <label><b>(0- No experience/ can’t say, 1- Dissatisfied, 2- Somewhat satisfied, 3- Satisfied, and 4- Very
+                Satisfied)?</b></label>
+        <br>
+        <label><b>11. How satisfied are you with training overall ?</b></label>
+        <select class="form-control" id="quetion11" formControlName="quetion11" 
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['quetion11'].errors}">
+            <option value="" disabled>-- Select -- </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['quetion11'].errors" class="invalid-feedback">
+            <div *ngIf="r['quetion11'].errors['required']">* </div>
+
+        </div>
+        <br>
+        <label><b>12. Relevance of training to your need ?</b></label>
+        <select class="form-control" id="quetion12" formControlName="quetion12"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['quetion12'].errors}">
+            <option value="" disabled>-- Select -- </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['quetion12'].errors" class="invalid-feedback">
+            <div *ngIf="r['quetion12'].errors['required']">* </div>
+        </div>
+        <br> <label><b>13. Interactivity of the training ?</b></label>
+        <select class="form-control" id="quetion13" formControlName="quetion13"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['quetion13'].errors}">
+            <option value="" disabled>-- Select -- </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['quetion13'].errors" class="invalid-feedback">
+            <div *ngIf="r['quetion13'].errors['required']">* </div>
+        </div>
+        <br> <label><b>14. Quality of information shared ?</b></label>
+        <select class="form-control" id="quetion14" formControlName="quetion14"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['quetion14'].errors}">
+            <option value="" disabled>-- Select -- </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['quetion14'].errors" class="invalid-feedback">
+            <div *ngIf="r['quetion14'].errors['required']">* </div>
+        </div>
+        <br> <label><b>15. Amount of information shared ?</b></label>
+        <select class="form-control" id="quetion15" formControlName="quetion15"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['quetion15'].errors}">
+            <option value="" disabled>-- Select -- </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['quetion15'].errors" class="invalid-feedback">
+            <div *ngIf="r['quetion15'].errors['required']">* </div>
+        </div>
+        <br> <label><b>16. Pace of the training ?</b></label>
+        <select class="form-control" id="quetion16" formControlName="quetion16"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['quetion16'].errors}">
+            <option value="" disabled>-- Select -- </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['quetion16'].errors" class="invalid-feedback">
+            <div *ngIf="r['quetion16'].errors['required']">* </div>
+        </div>
+        <br> <label><b>17. Style of trainer’s delivery ?</b></label>
+        <select class="form-control" id="quetion17" formControlName="quetion17"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['quetion17'].errors}">
+            <option value="" disabled>-- Select -- </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['quetion17'].errors" class="invalid-feedback">
+            <div *ngIf="r['quetion17'].errors['required']">* </div>
+        </div>
+        <br> <label><b>18. Ability of trainer to engage group ?</b></label>
+        <select class="form-control" id="quetion18" formControlName="quetion18"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['quetion18'].errors}">
+            <option value="" disabled>-- Select -- </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['quetion18'].errors" class="invalid-feedback">
+            <div *ngIf="r['quetion18'].errors['required']">* </div>
+        </div>
+        <br> <label><b>19. Ability of trainer to deliver information in a meaningful manner ?</b></label>
+        <select class="form-control" id="quetion19" formControlName="quetion19"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['quetion19'].errors}">
+            <option value="" disabled>-- Select -- </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['quetion19'].errors" class="invalid-feedback">
+            <div *ngIf="r['quetion19'].errors['required']">* </div>
+        </div>
+        <br>
+        <label><b>20.Ability of trainer to maintain and establish a positive training environment ?</b></label>
+        <select class="form-control" id="quetion20" formControlName="quetion20"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['quetion20'].errors}">
+            <option value="" disabled>-- Select -- </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div *ngIf="feedbackFormSubmited && r['quetion20'].errors" class="invalid-feedback">
+            <div *ngIf="r['quetion20'].errors['required']">* </div>
+        </div>
+        <br>
+    </div>
+    <div>
+        <label><b>COMMENTS AND FEEDBACK :</b></label>
+        <br>
+        <textarea cols="60" rows="4" formControlName="Comments" class="form-control"
+            [ngClass]="{'is-invalid': feedbackFormSubmited && r['Comments'].errors}"></textarea>
+        <div *ngIf="feedbackFormSubmited && r['Comments'].errors" class="invalid-feedback">
+            <div *ngIf="r['Comments'].errors['required']">Comments is required </div>
+          
+        </div>
+    </div>
+    <br>
+    <button *ngIf="!isAdmin" type="button" class="btn btn-primary" (click)="onsubmit()">Submit</button>
+</form>
+
+<div *ngIf="isSuccessfullSubmit && isAccess">
+
+    <body>
+        <form id="form1" runat="server">
+            <div>
+                <div class="jumbotron text-center">
+                    <h1 class="display-3">Thank You!</h1>
+                    <p class="lead"><strong>Thank you for sharing your valuable feedback with us</strong></p>
+                    <hr>
+                    <p>
+                        Having trouble? <a href="mailto:Juhi.s@optimumfintech.co.in">Contact Us</a>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </body>
+</div>
+
+<div *ngIf="!isAccess">
+
+    <body>
+        <form id="form1" runat="server">
+            <div>
+                <div class="jumbotron text-center">
+                    <h1 class="display-3">Access Denied</h1>                   
+                </div>
+            </div>
+        </form>
+    </body>
+</div>
+</div>
+<app-footer></app-footer>

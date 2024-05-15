@@ -1,0 +1,33 @@
+.first-outer,.second-outer{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.event1{
+  margin-left: 110px;
+}
+
+.swal2-html-container {
+  z-index: 1;
+  justify-content: center;
+  margin: 1em 1.6em .3em;
+  padding: 0;
+  overflow: auto;
+  color: inherit;
+  font-size: 1.125em;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left !important;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.box-outer{
+  .first-outer, .second-outer{
+    padding: 20px;
+  }
+}
+
+
+

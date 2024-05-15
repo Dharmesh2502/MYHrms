@@ -1,0 +1,626 @@
+<app-header></app-header>
+
+<!-- HR EDITABLE FROM -->
+<div class="back_outer">
+<div style="display: flex; justify-content: center; padding-top: 30px;" class="row back_outer" *ngIf="isAdmin" >
+    <div  style="background:#fafafa; box-shadow:1px 1px 20px #418bf7; border-radius:30px;margin-bottom: 20px; width: 1000px;" >
+         <div class="container center" style="width: 850px;" >
+         <form style="padding: 10px;" [autocomplete]="false" [formGroup]="User_DetailsFrom"  novalidate>
+             <h5 class="CenterAS" >Employee Registration From</h5>
+             <div class="MainHeader mt-5">
+                <div>
+                    <img [src]="Emp_Image" class="rounded-circle" *ngIf="isEmpPhoto">
+                    <div *ngIf="!isEmpPhoto">
+                    <input type="file"  formControlName="Image" (change)="handleFileInput($event);"   
+                    [ngClass]="{'is-invalid': fromsubmitted && r['Image'].errors}">
+                    <div *ngIf="fromsubmitted && r['Image'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Image'].errors['required']">Image is Required</div>
+                     </div> 
+                    </div>
+                </div>
+                    <!-- <div class="txtheading mt-1">
+                        Employee Profile
+                    </div> -->
+                </div>
+                <div class="accordion" style="padding-top: 30px" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Normal Information</button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+             <div class="form-group"  >
+                <input type="text" class="form-control"  id="emp_name" placeholder="Enter Your Name"   formControlName="Employee_Name" 
+                [ngClass]="{'is-invalid': fromsubmitted && r['Employee_Name'].errors}">
+                
+                <div *ngIf="fromsubmitted && r['Employee_Name'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Employee_Name'].errors['required']">Employee Name is Required</div>
+                    <div *ngIf=" r['Employee_Name'].errors['pattern']">Enter Valid Employee Name </div>
+                </div>
+             </div><br>
+             
+             <div class="form-group" *ngIf="isImageUpdate">
+                <input type="file" id="file" class="form-control"  placeholder="Update Profile Photo" formControlName="Updated_Image" (change)="handleFileInput($event);"   
+                    [ngClass]="{'is-invalid': fromsubmitted && r['Image'].errors}"><br>
+             </div>
+             
+             <!-- <div class="form-group" >
+                <input type="file" class="form-control" formControlName="Image" (change)="handleFileInput($event);" placeholder="Upload Your Image"  
+                [ngClass]="{'is-invalid': fromsubmitted && r['Image'].errors}">
+                <div *ngIf="fromsubmitted && r['Image'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Image'].errors['required']">Image is Required</div>
+                </div>
+             </div><br> -->
+             <div class="form-group">
+                <input type="text" class="form-control DOJ_datepicker" placeholder="Enter Your Date Of Joining"
+                id="datepicker"  data-provide="datepicker" readonly  formControlName="DOJ"
+                [ngClass]="{'is-invalid': fromsubmitted && r['DOJ'].errors}">
+                <div *ngIf="fromsubmitted && r['DOJ'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['DOJ'].errors['required']">Date Of Joining is Required</div>
+                    <!-- <div *ngIf=" r['DOJ'].errors['pattern']">Select Valid Date Of Joining Date</div> -->
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="number" class="form-control" placeholder="Enter Your Employee Code"  formControlName="Employee_Code"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Employee_Code'].errors}">
+                <div *ngIf="fromsubmitted && r['Employee_Code'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Employee_Code'].errors['required']">Employee Code is Required</div>
+                    <div *ngIf=" r['Employee_Code'].errors['pattern']">Enter Valid Employee Code</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Desigination" formControlName="Desigination"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Desigination'].errors}">
+                <div *ngIf="fromsubmitted && r['Desigination'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Desigination'].errors['required']">Desigination is Required</div>
+                    <div *ngIf=" r['Desigination'].errors['pattern']">Enter Valid Desigination</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Working Status" formControlName="Working_Status"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Working_Status'].errors}">
+                <div *ngIf="fromsubmitted && r['Working_Status'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Working_Status'].errors['required']">Working Status is Required</div>
+                    <div *ngIf=" r['Working_Status'].errors['pattern']">Enter Valid Working Status</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Location"   formControlName="Location"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Location'].errors}">
+                <div *ngIf="fromsubmitted && r['Location'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Location'].errors['required']">Location is Required</div>
+                    <div *ngIf=" r['Location'].errors['pattern']">Enter Valid Location</div>
+                </div>
+             </div><br>
+            </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Personal Information
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Total Experience"    formControlName="Total_Experience"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Total_Experience'].errors}">
+                <div *ngIf="fromsubmitted && r['Total_Experience'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Total_Experience'].errors['required']">Total Experience is Required</div>
+                    <div *ngIf=" r['Total_Experience'].errors['pattern']">Enter Valid Total Experience</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="text" class="form-control DOB_datepicker" placeholder="Enter Your Date Of Birth"  id="datepicker"  
+                data-provide="datepicker" readonly [ngClass]="{'is-invalid': fromsubmitted && r['DOB'].errors}" formControlName="DOB">
+                <div *ngIf="fromsubmitted && r['DOB'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['DOB'].errors['required']">Date Of Birth is Required</div>
+                    <div *ngIf=" r['DOB'].errors['pattern']">Enter Valid FirstName</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Blood Group"   formControlName="Blood_Group"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Blood_Group'].errors}">
+                <div *ngIf="fromsubmitted && r['Blood_Group'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Blood_Group'].errors['required']">Blood Group is Required</div>
+                    <div *ngIf=" r['Blood_Group'].errors['pattern']">Enter Valid Blood Group</div>
+                </div>
+             </div><br>
+
+
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Father/Husband Name"    formControlName="FatherHusband_Name"
+                [ngClass]="{'is-invalid': fromsubmitted && r['FatherHusband_Name'].errors}">
+                <div *ngIf="fromsubmitted && r['FatherHusband_Name'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['FatherHusband_Name'].errors['required']">Father/Husband Name is Required</div>
+                    <div *ngIf=" r['FatherHusband_Name'].errors['pattern']">Enter Valid Father/Husband Name</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Mother Name"   formControlName="Mother_Name"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Mother_Name'].errors}">
+                <div *ngIf="fromsubmitted && r['Mother_Name'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Mother_Name'].errors['required']"> Mother Name is Required</div>
+                    <div *ngIf=" r['Mother_Name'].errors['pattern']">Enter Valid  Mother Name</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Marititual Status  "    formControlName="Matitual_Status"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Matitual_Status'].errors}">
+                <div *ngIf="fromsubmitted && r['Matitual_Status'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Matitual_Status'].errors['required']">Marititual Status is Required</div>
+                    <div *ngIf=" r['Matitual_Status'].errors['pattern']">Enter Valid Marititual Status</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <select formControlName="Highest_Qualification"   class="form-control" 
+                 [ngClass]  ="{'is-invalid': fromsubmitted && r['Highest_Qualification'].errors}">
+                     <option value="0"  disabled>Select Your Education</option>
+                     <option value="10th">10th</option>
+                     <option value="12th">12th</option>
+                     <option value="BCA">BCA</option>
+                     <option value="B.Sc">B.Sc</option>
+                     <option value="B.Tech">B.Tech</option>
+                     <option value="Other">Other</option>
+                 </select>
+                 <div *ngIf="fromsubmitted && r['Highest_Qualification'].errors" class="alert alert-danger">
+                    <div *ngIf="r['Highest_Qualification'].errors">Highest Qualification is required.</div>
+                </div>
+             </div><br>
+             <div>
+                
+             </div>
+             <div class="form-group">
+                <input type="text" class="form-control"  placeholder="Enter Your Emergency Conatact Person Name"     formControlName="Emerg_ConatactPerson"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Emerg_ConatactPerson'].errors}">
+                <div *ngIf="fromsubmitted && r['Emerg_ConatactPerson'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Emerg_ConatactPerson'].errors['required']">Person Name is Required</div>
+                    <div *ngIf=" r['Emerg_ConatactPerson'].errors['pattern']">Enter Valid Person Name</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="number" class="form-control"  placeholder="Enter Your Emergency Conatact Person Number"   formControlName="Emerg_ConatactNumber"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Emerg_ConatactNumber'].errors}">
+                <div *ngIf="fromsubmitted && r['Emerg_ConatactNumber'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Emerg_ConatactNumber'].errors['required']">Person Number is Required</div>
+                    <div *ngIf=" r['Emerg_ConatactNumber'].errors['pattern']">Enter Valid Person Number</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="text" class="form-control"  placeholder="Enter Your Email" pattern="^\w+([\.-]?\w+)*@\w+([\.]?\w+)*(\.\w{2,3})+$" formControlName="Email_id"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Email_id'].errors}">
+                <div *ngIf="fromsubmitted && r['Email_id'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Email_id'].errors['required']"> Email ID is Required</div>
+                    <div *ngIf=" r['Email_id'].errors['pattern']">Enter Valid Email ID</div>
+                </div>
+             </div><br>
+            </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+            Official Details
+          </button>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your PanCard No"   formControlName="PanCard_No"
+                [ngClass]="{'is-invalid': fromsubmitted && r['PanCard_No'].errors}">
+                <div *ngIf="fromsubmitted && r['PanCard_No'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['PanCard_No'].errors['required']"> PanCard No is Required</div>
+                    <div *ngIf=" r['PanCard_No'].errors['pattern']">Enter Valid  PanCard No</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="number" class="form-control"  placeholder="Enter Your Addhar Card No"   formControlName="Adhar_No"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Adhar_No'].errors}">
+                <div *ngIf="fromsubmitted && r['Adhar_No'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Adhar_No'].errors['required']">Addhar Card No is Required</div>
+                    <div *ngIf=" r['Adhar_No'].errors['pattern']">Enter Valid Addhar Card No</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Current Address"   formControlName="Curr_Address"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Curr_Address'].errors}">
+                <div *ngIf="fromsubmitted && r['Curr_Address'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Curr_Address'].errors['required']">Current Address is Required</div>
+                    <div *ngIf=" r['Curr_Address'].errors['pattern']">Enter Valid Current Address</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="number" class="form-control" placeholder="Enter Your Role"   formControlName="Role"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Role'].errors}">
+                <div *ngIf="fromsubmitted && r['Role'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Role'].errors['required']">Role is Required</div>
+                    <div *ngIf=" r['Role'].errors['pattern']">Enter Valid Role</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <select id="dept"  formControlName="Department"   class="form-control select2-selection__rendered" 
+                [ngClass]  ="{'is-invalid': fromsubmitted && r['Department'].errors}" style="width:100%;" >
+                    <option value="" Selected disabled>Select Department</option>    
+                    <option value="{{rep.dept_id}}" *ngFor="let rep of departmentData" >
+                        {{rep.dept_name}}</option>
+                </select>
+                <!-- <input type="text" class="form-control" placeholder="Enter Your Department"   formControlName="Department"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Department'].errors}"> -->
+                <div *ngIf="fromsubmitted && r['Department'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Department'].errors['required']">Department is Required</div>
+                    <div *ngIf=" r['Department'].errors['pattern']">Enter Valid Department</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                <input type="text" class="form-control"  placeholder="Enter Your Permanent Address"  formControlName="Perma_Addresss"
+                [ngClass]="{'is-invalid' : fromsubmitted && r['Perma_Addresss'].errors}">
+                <div *ngIf="fromsubmitted && r['Perma_Addresss'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Perma_Addresss'].errors['required']">Permanent Address is Required</div>
+                    <div *ngIf=" r['Perma_Addresss'].errors['pattern']">Enter Valid Permanent Address</div>
+                </div><br>
+                
+             <!-- <div class="form-group">
+                 <select formControlName="Education" id="educations"  class="form-control" 
+                 [ngClass]  ="{'is-invalid': fromsubmitted && r['Education'].errors}">
+                     <option value="">Select Your Education</option>
+                     <option value="10th">10th</option>
+                     <option value="12th">12th</option>
+                     <option value="BCA">BCA</option>
+                     <option value="B.Sc">B.Sc</option>
+                     <option value="B.Tech">B.Tech</option>
+                     <option value="Other">Other</option>
+                 </select>
+                 <div *ngIf="fromsubmitted && r['Education'].errors" class="alert alert-danger">
+                    <div *ngIf="r['Education'].errors">Education is required.</div>
+                </div>
+             </div><br>
+             <div class="form-group">
+                 <select formControlName="Occupation" id="Occupetions" class="form-control" 
+                 [ngClass]  ="{'is-invalid': fromsubmitted && r['Occupation'].errors}">
+                     <option value="">Select Your Occupetion</option>
+                     <option value="Businees">Businees</option>
+                     <option value="Job">Job</option>
+                     <option value="Other">Other</option>
+                 </select>
+                 <div *ngIf="fromsubmitted && r['Occupation'].errors" class="alert alert-danger">
+                    <div *ngIf="fromsubmitted ">Occupation is required.</div>
+                </div>
+             </div><br> -->
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Official Email ID"  pattern="^\w+([\.-]?\w+)*@\w+([\.]?\w+)*(\.\w{2,3})+$"   formControlName="Official_EmaildID"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Official_EmaildID'].errors}">
+                <div *ngIf="fromsubmitted && r['Official_EmaildID'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['Official_EmaildID'].errors['required']">Official Email ID is Required</div>
+                    <div *ngIf=" r['Official_EmaildID'].errors['pattern']">Enter Valid Official Email ID</div>
+                </div>
+             </div><br>
+             <div class="form-group"  style="border: 1px solid #959595 ; border-radius: 2px;  height: 33px;">
+                     <label > &nbsp;Select Your Gender</label> &nbsp; &nbsp;
+                    <input type="radio" id="male" value="Male" formControlName="Gender" [ngClass]="{'is-invalid': fromsubmitted && r['Gender'].errors}" > Male &nbsp;
+                    <input type="radio" id="female" value="Female" formControlName="Gender"  [ngClass]="{'is-invalid': fromsubmitted && r['Gender'].errors}"  > Female
+                    <div *ngIf="r['Gender'].invalid" class="invalid-feedback">
+                        <p>Please Select Gender</p>
+                    </div>
+            </div><br> 
+             <!-- <div class="form-group">
+                <input type="text"  placeholder="Enter Your Date Of Birth"  id="datepicker"  
+                    data-provide="datepicker" class="form-control clsdatepicker"   formControlName="DOB"
+                 [ngClass]="{'is-invalid': fromsubmitted && r['DOB'].errors}">
+                 <div *ngIf="fromsubmitted && r['DOB'].errors" class="invalid-feedback">
+                    <div *ngIf="fromsubmitted && r['DOB'].errors['required']">Date Of Birth is Required</div>
+                 </div>
+             </div> -->
+             <div class="form-group" >
+                <input type="number" class="form-control"  placeholder="Enter Your UAN Number"  formControlName="UAN_Number"
+                [ngClass]="{'is-invalid': fromsubmitted && r['UAN_Number'].errors}">
+                <div *ngIf="fromsubmitted && r['UAN_Number'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['UAN_Number'].errors['required']">UAN Number is Required</div>
+                    <div *ngIf=" r['UAN_Number'].errors['pattern']">Enter Valid UAN Number</div>
+                </div>
+            </div><br>
+            <div class="form-group" >
+                <input type="number" class="form-control" placeholder="Enter Your ESIC Number"    formControlName="ESIC_Number"
+                [ngClass]="{'is-invalid': fromsubmitted && r['ESIC_Number'].errors}">
+                <div *ngIf="fromsubmitted && r['ESIC_Number'].errors" class="invalid-feedback">
+                    <div *ngIf=" r['ESIC_Number'].errors['required']">ESIC Number is Required</div>
+                    <div *ngIf=" r['ESIC_Number'].errors['pattern']">Enter Valid FirstName</div>
+                </div>
+            </div><br>
+            <div class="form-group" >
+                <input type="text" class="form-control" placeholder="Enter Your Mediclam ID"    formControlName="Mediclam_ID"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Mediclam_ID'].errors}">
+                <div *ngIf="fromsubmitted && r['Mediclam_ID'].errors" class="invalid-feedback">
+                    <div *ngIf="r['Mediclam_ID'].errors['required']">Mediclam ID is Required</div>
+                    <div *ngIf="r['Mediclam_ID'].errors['pattern']">Enter Valid Mediclam ID</div>
+                </div>
+            </div><br>
+             <!-- <div class="form-group" style="border: 1px solid #959595; border-radius: 4px; ">
+                <label > &nbsp;Select Spoken Language</label> &nbsp; &nbsp;
+                 <div *ngFor="let data of language; let i=index" >
+                <input type="checkbox" [value]="data.value" [checked]="data.ischeked" 
+                (change)="selection_langs($event);"   
+                [ngClass]="{'is-invalid': fromsubmitted && r['Language'].errors}" >{{data.name}} &nbsp;
+                </div> 
+                <div *ngIf="r['Language'].invalid" class="invalid-feedback">
+                    <p>Please Select Language</p>
+                 </div>
+            </div><br>   -->
+            <!-- <div class="form-group">
+                <input type="text" placeholder="Enter Password" class="form-control"   formControlName="Password"
+                [ngClass]="{'is-invalid': fromsubmitted && r['Password'].errors}" >
+                <div *ngIf="fromsubmitted && r['Password'].errors" class="invalid-feedback">
+                    <div *ngIf="r['Password'].errors['required']"> Password Must Need To be Enter</div>
+                    <div *ngIf="r['Password'].errors['pattern']">Enter Valid Password</div>
+                </div>
+            </div><br>
+             <div class="form-group">
+                 <input type="text" placeholder="Re-Enter Password" class="form-control"  formControlName="Cfm_Password"
+                 [ngClass]="{'is-invalid': fromsubmitted && r['Cfm_Password'].errors}" >
+                 <div *ngIf="fromsubmitted && r['Cfm_Password'].errors" class="invalid-feedback">
+                    <div *ngIf="r['Cfm_Password'].errors['required']">Confirm Password Must Enter</div>
+                    <div *ngIf="r['Cfm_Password'].errors['MustMatch']">Password Is Not Same</div>
+    
+                 </div>
+             </div><br> -->
+             
+             <!-- <div class="form-group" >
+                 <input type="checkbox" [id]="cheksbox" required  formControlName="TermsANDCondition" 
+                 [ngClass]  ="{'is-invalid': fromsubmitted && r['TermsANDCondition'].errors}" >&nbsp;
+                 <label for="TermsANDCondition"> I Accepect All Terms And Conditions</label><br>
+                 <div *ngIF="fromsubmitted && r['TermsANDCondition'].errors"  class="invalid-feedback">
+                    <div *ngIF="fromsubmitted && r['TermsANDCondition'].errors['required']" >TermsANDCondition is Required</div>
+                 </div>
+             </div><br> -->
+             
+            </div>
+        </div>
+      </div>
+    </div>
+        <div class="text-center mt-5">
+            <button class="btn btn-primary" (click)="updateUserRecords();" >Submit</button>&nbsp;
+            <button class="btn btn-secondary"  >Reset</button>  
+        </div> 
+    </div>
+    </form>
+    </div>
+</div>
+</div>
+
+<!-- 
+Employee View Profile -->
+<div class="p-5" *ngIf="!isAdmin" >
+    <table border="1" width="100%;" cellpadding="10">
+        <tr>
+       
+        <div>
+            <div class="d-flex justify-content-center profile_img">
+                <img src="../../assets/images/OptimumLogo.svg">
+            </div>
+            <div>Employee Profile</div>
+        </div>
+        </tr>
+        <tr>
+            <th  rowspan="9">
+                 <img class="profile_img" width="120px;" [src]="sampledata.Image">
+            </th>
+        </tr>
+        <tr>
+            <td>Employee Name</td>
+            <td>{{sampledata.Employee_Name}}</td>
+        </tr>
+        <tr>
+            <td>Date Of Joining</td>
+            <td>{{sampledata.DOJ | date : 'dd/MM/yyyy'}}</td>
+        </tr>
+        <tr>
+            <td>Employee Code</td>
+            <td>{{sampledata.Employee_Code}}</td>
+        </tr>
+        <tr>
+            <td>Desigination</td>
+            <td>{{sampledata.Desigination}}</td>
+        </tr>
+        <tr>
+            <td>Working Status(Probation/Permanent)</td>
+            <td>{{sampledata.Working_Status}}</td>
+        </tr>
+        <tr>
+            <td>Reporting Manager</td>
+            <td>{{sampledata.Reporting_Manager}}</td>
+        </tr>
+        <tr>
+            <td>Reporting Manager</td>
+            <td>{{sampledata.Reporting_Manager}}</td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td>{{sampledata.Location}}</td>
+        </tr>
+        <tr>
+            <div class="headers text mt-2">
+                <h3> Personal Details</h3>
+            </div>
+        </tr>
+        <tr>
+            <td>Total Experience</td>
+            <td colspan="2">{{sampledata.Total_Experience}}</td>
+        </tr>
+        <tr>
+            <td>Date Of Birth</td>
+            <td colspan="2">{{sampledata.DOB |   date : 'dd/MM/yyyy'}}</td>
+        </tr>
+        <tr>
+            <td>Blood Group</td>
+            <td colspan="2">{{sampledata.Blood_Group}}</td>
+        </tr>
+        <tr>
+            <td>Father/Husband Name</td>
+            <td colspan="2">{{sampledata.FatherHusband_Name}}</td>
+        </tr>
+        <tr>
+            <td>Mother Name</td>
+            <td colspan="2">{{sampledata.Mother_Name}}</td>
+        </tr>
+        <!-- <tr>
+            <td>Martitual Status</td>
+            <td colspan="2">{{sampledata.Marititual}}</td>
+        </tr> -->
+        <tr>
+            <td>Highest Qualification</td>
+            <td colspan="2">{{sampledata.Highest_Qualification}}</td>
+        </tr>
+        <tr>
+            <td>Emergency Conatact Person</td>
+            <td colspan="2">{{sampledata.Emerg_ConatactPerson}}</td>
+        </tr>
+        <tr>
+            <td>Emergency Conatact Number</td>
+            <td colspan="2">{{sampledata.Emerg_ConatactNumber}}</td>
+        </tr>
+        <tr>
+            <td>Personal Email</td>
+            <td colspan="2">{{sampledata.Email_id}}</td>
+        </tr>
+        <tr>
+            <td>Pan Card No.</td>
+            <td colspan="2">{{sampledata.PanCard_No}}</td>
+        </tr>
+        <tr>
+            <td>Aadhar Card No.</td>
+            <td colspan="2">{{sampledata.Adhar_No}}</td>
+        </tr>
+        <tr>
+            <td>Current Address</td>
+            <td colspan="2">{{sampledata.Curr_Address}}</td>
+        </tr>
+        <tr>
+            <td>Permannent Address</td>
+            <td colspan="2">{{sampledata.Perma_Addresss}}</td>
+        </tr>
+        <tr>
+            <div class="headers text mt-2">
+                <h3> Official Details</h3>
+            </div>
+        </tr>
+        <tr>
+            <td>Official Email id</td>
+            <td colspan="2">{{sampledata.Official_EmaildID}}</td>
+        </tr>
+        <tr>
+            <td>UAN Number</td>
+            <td colspan="2">{{sampledata.UAN_Number}}</td>
+        </tr>
+        <tr>
+            <td>ESIC Number</td>
+            <td colspan="2">{{sampledata.ESIC_Number}}</td>
+        </tr>
+        <tr>
+            <td>Mediclaim Id</td>
+            <td colspan="2">{{sampledata.Mediclam_ID}}</td>
+        </tr>
+        
+    </table>
+    </div>
+
+
+<!-- <div  class="row" *ngIf="!isAdmin" >
+ <table>
+     <div class="profile_img" >
+            <div>
+                <img src="../../assets/NewOptimumLogo.svg">
+            </div>
+            <div >Employee Profile</div>
+      </div>
+    <tr> 
+        <th>
+            <img width="120px;" [src]="Emp_Image">
+        </th>
+        <th>
+            <tr>Employee Name</tr>
+            <tr>Date Of Joining</tr>
+            <tr>Employee Code</tr>
+            <tr>Desigination</tr>
+            <tr>Working Status(Probation/Permanent)</tr>
+            <tr>Reporting Manager</tr>
+            <tr>Location</tr>
+        </th>
+        <th >
+            <tr>{{sampledata.Employee_Name}}</tr>
+            <tr>{{sampledata.DOJ}}</tr>  
+            <tr>{{sampledata.Employee_Code}}</tr>    
+            <tr>{{sampledata.Desigination}}</tr>
+            <tr>{{sampledata.Working_Status}}</tr>  
+            <tr>{{sampledata.Reporting_Manager}}</tr>
+            <tr>{{sampledata.Location}}</tr>
+        </th>
+    </tr>
+</table>
+<div class="headers text">
+    <h3> Personal Details</h3>
+</div>
+    <table>
+<div>Personal Details</div>
+    <tr>
+        <td>
+            <tr>Total Experience</tr>
+            <tr>Date Of Birth</tr>
+            <tr>Blood Group</tr>
+            <tr>Father/Husband Name</tr>
+            <tr>Mother Name</tr>
+            <tr>Martitual Status</tr>
+            <tr>Highest Qualification</tr>
+            <tr>Emergency Conatact Person</tr>
+            <tr>Emergency Contatct Number</tr>
+            <tr>Personal Email</tr>
+            <tr>Pan Card No.</tr>
+            <tr>Aadhar Card No.</tr>
+            <tr>Current Address</tr>
+            <tr>Permannent Address</tr>
+        </td>
+        <td>
+            <tr>{{sampledata.Total_Experience}}</tr>
+            <tr>{{sampledata.DOB}}</tr>
+            <tr>{{sampledata.Blood_Group}}</tr>
+            <tr>{{sampledata.FatherHusband_Name}}</tr>
+            <tr>{{sampledata.Mother_Name}}</tr>
+            <tr>{{sampledata.Matitual_Status}}</tr>
+            <tr>{{sampledata.Highest_Qualification}}</tr>
+            <tr>{{sampledata.Emerg_ConatactPerson}}</tr>
+            <tr>{{sampledata.Emerg_ConatactNumber}}</tr>
+            <tr>{{sampledata.Email_id}}</tr>
+            <tr>{{sampledata.PanCard_No}}</tr>
+            <tr>{{sampledata.Adhar_No}}</tr>
+            <tr>{{sampledata.Curr_Address}}</tr>
+            <tr>{{sampledata.Perma_Addresss}}</tr>
+        </td>
+    </tr>
+    <tr class="headers text">
+        <h3>Official Details</h3>
+    </tr>
+    <tr width="95%">
+        <td>
+            <tr>Official Email id</tr>
+            <tr>UAN Number</tr>
+            <tr>ESIC Number</tr>
+            <tr>Mediclaim Id</tr>
+        </td>
+        <td>
+            <tr>{{sampledata.Official_EmaildID}}</tr>
+            <tr>{{sampledata.UAN_Number}}</tr>
+            <tr>{{sampledata.Working_Status}}</tr>
+            <tr>{{sampledata.Mediclam_ID}}</tr>
+        </td>
+    </tr>
+    <tr colspan="2">
+        <div class="cont_center mt-1 ">
+            <div>Edit/Change Request</div>&nbsp;&nbsp;
+            <button class="btn btn-outline-primary">Click Here</button>
+        </div>
+    </tr>
+</table>
+</div>-->
+</div>
+<app-footer></app-footer>
